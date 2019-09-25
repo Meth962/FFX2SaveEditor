@@ -1,0 +1,34 @@
+﻿<Window x:Class="FFX2SaveEditor.MiniGame"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:FFX2SaveEditor"
+        mc:Ignorable="d"
+        Title="MiniGame" Height="341.95" Width="404.873"
+        ResizeMode="NoResize"
+        Icon="Resources/tonberry.gif"
+        Loaded="Window_Loaded">
+    <Grid Margin="0,0,5,2.5">
+        <Button x:Name="btnCancel" Style="{StaticResource Ffx2Button}" Margin="0,0,105,9.5" Click="btnCancel_Click" FontSize="18" FontWeight="Bold" HorizontalAlignment="Right" Width="90" Height="32" VerticalAlignment="Bottom">
+            <Button.Effect>
+                <DropShadowEffect BlurRadius="0" ShadowDepth="10" Direction="315" Color="Black" Opacity="0.5"/>
+            </Button.Effect>
+            <TextBlock Text="Cancel" Foreground="#E1E1E1">
+                <TextBlock.Effect>
+                    <DropShadowEffect BlurRadius="0" Direction="315" Color="Black" ShadowDepth="3"/>
+                </TextBlock.Effect>
+            </TextBlock>
+        </Button>
+        <Button x:Name="btnOK" Style="{StaticResource Ffx2Button}" Margin="0,0,10,9.5" Click="btnOK_Click" FontSize="18" FontWeight="Bold" HorizontalAlignment="Right" Width="90" Height="32" VerticalAlignment="Bottom">
+            <Button.Effect>
+                <DropShadowEffect BlurRadius="0" ShadowDepth="10" Direction="315" Color="Black" Opacity="0.5"/>
+            </Button.Effect>
+            <TextBlock Text="OK" Foreground="#E1E1E1" RenderTransformOrigin="0.4,2.454">
+                <TextBlock.Effect>
+                    <DropShadowEffect BlurRadius="0" Direction="315" Color="Black" ShadowDepth="3"/>
+                </TextBlock.Effect>
+            </TextBlock>
+        </Button>
+    </Grid>
+</Window>

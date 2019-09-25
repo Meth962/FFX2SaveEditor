@@ -1,0 +1,1140 @@
+﻿<Window
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:Themes="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero" x:Class="FFX2SaveEditor.MainWindow"
+    xmlns:local="clr-namespace:FFX2SaveEditor"
+    Title="FFX-2 Save Editor" Height="1080" Width="1920"
+    Loaded="Window_Loaded"
+    FontFamily="Helvetica Neue" Icon="Resources/tonberry.gif" WindowStartupLocation="CenterScreen" WindowState="Maximized">
+    <Window.Background>
+        <ImageBrush ImageSource="/FFX2SaveEditor;component/Resources/Background.png"/>
+    </Window.Background>
+    <Grid>
+        <Grid Name="TopNav">
+            <Button x:Name="btnLoad" HorizontalAlignment="Left" Margin="10,10,0,0" Width="360" FontWeight="Bold" FontSize="22" Foreground="#E1E1E1" BorderBrush="{x:Null}" BorderThickness="0" Height="60" VerticalAlignment="Top" Click="btnLoad_Click" Cursor="Hand" Style="{DynamicResource ButtonStyle1}">
+                <Button.Effect>
+                    <DropShadowEffect ShadowDepth="10" Direction="315" Color="Black" Opacity="0.5"/>
+                </Button.Effect>
+                <Button.Background>
+                    <ImageBrush ImageSource="/FFX2SaveEditor;component/Resources/SmallBar.png"/>
+                </Button.Background>
+                <TextBlock Text="Load Save" Foreground="#E1E1E1">
+                    <TextBlock.Effect>
+                        <DropShadowEffect BlurRadius="0" Direction="315" Color="Black" ShadowDepth="3"/>
+                    </TextBlock.Effect>
+                </TextBlock>
+            </Button>
+            <Button x:Name="btnSave" HorizontalAlignment="Left" Margin="397,10,0,0" Width="360" FontWeight="Bold" FontSize="22" Foreground="#E1E1E1" BorderBrush="{x:Null}" BorderThickness="0" Height="60" VerticalAlignment="Top" Click="btnSave_Click" Cursor="Hand" Style="{DynamicResource ButtonStyle1}">
+                <Button.Effect>
+                    <DropShadowEffect ShadowDepth="10" Direction="315" Color="Black" Opacity="0.5"/>
+                </Button.Effect>
+                <Button.Background>
+                    <ImageBrush ImageSource="Resources/SmallBar.png"/>
+                </Button.Background>
+                <TextBlock Text="Save As..." Foreground="#E1E1E1">
+                    <TextBlock.Effect>
+                        <DropShadowEffect BlurRadius="0" Direction="315" Color="Black" ShadowDepth="3"/>
+                    </TextBlock.Effect>
+                </TextBlock>
+            </Button>
+            <Label HorizontalAlignment="Left" Margin="0,81,-8,0" VerticalAlignment="Top" Width="1920" Height="52">
+                <Label.Background>
+                    <ImageBrush ImageSource="/FFX2SaveEditor;component/Resources/HelpBar.png"/>
+                </Label.Background>
+            </Label>
+            <Label x:Name="lblHelp" Content="Load a Save." HorizontalAlignment="Left" Margin="216,90,0,0" VerticalAlignment="Top" Width="1648" Height="32" Foreground="#E1E1E1" FontSize="20" FontWeight="Bold"/>
+        </Grid>
+        <Grid Name="MainPage" MouseWheel="MainPage_MouseWheel">
+            <Grid Name="YunaPlate">
+                <Grid.RenderTransform>
+                    <TranslateTransform x:Name="transYuna" X="0" Y="0" />
+                </Grid.RenderTransform>
+                <Image x:Name="imgYuna" Margin="952,174,0,0" Source="/FFX2SaveEditor;component/Resources/YunaPlate.png" HorizontalAlignment="Left" Width="781" Height="128" VerticalAlignment="Top">
+                    <Image.Effect>
+                        <DropShadowEffect ShadowDepth="50" Direction="315" Color="Black" Opacity="0.5" BlurRadius="0"/>
+                    </Image.Effect>
+                </Image>
+                <TextBox x:Name="tbxYunaLvl" Tag="0" MaxLength="2" HorizontalAlignment="Left" Height="35" Margin="1246,228,0,0" TextWrapping="Wrap" Text="99" VerticalAlignment="Top" Width="47" Background="{x:Null}" Foreground="#C1C1C1" FontSize="28" HorizontalContentAlignment="Right" BorderBrush="{x:Null}" PreviewTextInput="textboxNum2_PreviewTextInput" MouseWheel="textboxNum2_MouseWheel" IsEnabled="False" CommandManager.PreviewCanExecute="textbox_PreviewCanExecute" LostFocus="textboxLevel_LostFocus">
+                    <TextBox.Effect>
+                        <DropShadowEffect BlurRadius="0" Direction="315" Color="Black" ShadowDepth="3"/>
+                    </TextBox.Effect>
+                </TextBox>
+                <Label x:Name="lblYunaHP" HorizontalAlignment="Left" Height="34" Margin="1402,212,0,0" Content="9999 / 9999" VerticalAlignment="Top" Width="301" Foreground="#C1C1C1" FontSize="28" HorizontalContentAlignment="Center">
+                    <Label.Effect>
+                        <DropShadowEffect BlurRadius="0" Direction="315" Color="Black" ShadowDepth="3"/>
+                    </Label.Effect>
+                </Label>
+                <Label x:Name="lblYunaMP" HorizontalAlignment="Left" Height="34" Margin="1402,250,0,0" Content="999 / 999" VerticalAlignment="Top" Width="301" Background="{x:Null}" Foreground="#C1C1C1" FontSize="28" HorizontalContentAlignment="Center" BorderBrush="{x:Null}">
+                    <Label.Effect>
+                        <DropShadowEffect BlurRadius="0" Direction="315" Color="Black" ShadowDepth="3"/>
+                    </Label.Effect>
+                </Label>
+                <Label x:Name="lblYunaDress" Content="Gunner" HorizontalAlignment="Left" Margin="1402,180,0,0" VerticalAlignment="Top" Width="301" Foreground="#C1C1C1" FontSize="28" HorizontalContentAlignment="Center">
+                    <Label.Effect>
+                        <DropShadowEffect Direction="315" Color="Black" ShadowDepth="3"/>
+                    </Label.Effect>
+                </Label>
+            </Grid>
+            <Grid Name="RikkuPlate">
+                <Grid.RenderTransform>
+                    <TranslateTransform x:Name="transRikku" X="0" Y="0" />
+                </Grid.RenderTransform>
+                <Image x:Name="imgRikku" Margin="794,311,0,0" Source="/FFX2SaveEditor;component/Resources/RikkuPlate.png" Height="170" VerticalAlignment="Top" HorizontalAlignment="Left" Width="781">
+                    <Image.Effect>
+                        <DropShadowEffect ShadowDepth="50" Direction="315" Color="Black" Opacity="0.5" BlurRadius="0"/>
+                    </Image.Effect>
+                </Image>
+                <TextBox x:Name="tbxRikkuLvl" Tag="1" MaxLength="2" HorizontalAlignment="Left" Height="35" Margin="1085,407,0,0" TextWrapping="Wrap" Text="99" VerticalAlignment="Top" Width="47" Background="{x:Null}" Foreground="#C1C1C1" FontSize="28" HorizontalContentAlignment="Right" BorderBrush="{x:Null}" PreviewTextInput="textboxNum2_PreviewTextInput" MouseWheel="textboxNum2_MouseWheel" IsEnabled="False" CommandManager.PreviewCanExecute="textbox_PreviewCanExecute" LostFocus="textboxLevel_LostFocus">
+                    <TextBox.Effect>
+                        <DropShadowEffect BlurRadius="0" Direction="315" Color="Black" ShadowDepth="3"/>
+                    </TextBox.Effect>
+                </TextBox>
+                <Label x:Name="lblRikkuMP" HorizontalAlignment="Left" Height="34" Margin="1246,432,0,0" Content="999 / 999" VerticalAlignment="Top" Width="301" Background="{x:Null}" Foreground="#C1C1C1" FontSize="28" HorizontalContentAlignment="Center" BorderBrush="{x:Null}">
+                    <Label.Effect>
+                        <DropShadowEffect BlurRadius="0" Direction="315" Color="Black" ShadowDepth="3"/>
+                    </Label.Effect>
+                </Label>
+                <Label x:Name="lblRikkuHP" HorizontalAlignment="Left" Height="34" Margin="1246,390,0,0" Content="9999 / 9999" VerticalAlignment="Top" Width="301" Foreground="#C1C1C1" FontSize="28" HorizontalContentAlignment="Center">
+                    <Label.Effect>
+                        <DropShadowEffect BlurRadius="0" Direction="315" Color="Black" ShadowDepth="3"/>
+                    </Label.Effect>
+                </Label>
+                <Label x:Name="lblRikkuDress" Content="Thief" HorizontalAlignment="Left" Margin="1246,360,0,0" VerticalAlignment="Top" Width="301" Foreground="#C1C1C1" FontSize="28" HorizontalContentAlignment="Center">
+                    <Label.Effect>
+                        <DropShadowEffect Direction="315" Color="Black" ShadowDepth="3"/>
+                    </Label.Effect>
+                </Label>
+            </Grid>
+            <Grid Name="PainePlate">
+                <Grid.RenderTransform>
+                    <TranslateTransform x:Name="transPaine" X="0" Y="0" />
+                </Grid.RenderTransform>
+                <Image x:Name="imgPaine" Margin="700,508,0,0" Source="/FFX2SaveEditor;component/Resources/PainePlate.png" HorizontalAlignment="Left" Width="781" Height="152" VerticalAlignment="Top">
+                    <Image.Effect>
+                        <DropShadowEffect ShadowDepth="50" Direction="315" Color="Black" Opacity="0.5" BlurRadius="0"/>
+                    </Image.Effect>
+                </Image>
+                <Label x:Name="lblPaineHP" HorizontalAlignment="Left" Height="34" Margin="1150,572,0,0" Content="9999 / 9999" VerticalAlignment="Top" Width="301" Background="{x:Null}" Foreground="#C1C1C1" FontSize="28" HorizontalContentAlignment="Center" BorderBrush="{x:Null}">
+                    <Label.Effect>
+                        <DropShadowEffect BlurRadius="0" Direction="315" Color="Black" ShadowDepth="3"/>
+                    </Label.Effect>
+                </Label>
+                <TextBox x:Name="tbxPaineLvl" Tag="2" MaxLength="2" HorizontalAlignment="Left" Height="35" Margin="992,585,0,0" TextWrapping="Wrap" Text="99" VerticalAlignment="Top" Width="47" Background="{x:Null}" Foreground="#C1C1C1" FontSize="28" HorizontalContentAlignment="Right" BorderBrush="{x:Null}" PreviewTextInput="textboxNum2_PreviewTextInput" MouseWheel="textboxNum2_MouseWheel" IsEnabled="False" CommandManager.PreviewCanExecute="textbox_PreviewCanExecute" LostFocus="textboxLevel_LostFocus">
+                    <TextBox.Effect>
+                        <DropShadowEffect BlurRadius="0" Direction="315" Color="Black" ShadowDepth="3"/>
+                    </TextBox.Effect>
+                </TextBox>
+                <Label x:Name="lblPaineMP" HorizontalAlignment="Left" Height="34" Margin="1150,610,0,0" Content="999 / 999" VerticalAlignment="Top" Width="301" Background="{x:Null}" Foreground="#C1C1C1" FontSize="28" HorizontalContentAlignment="Center" BorderBrush="{x:Null}">
+                    <Label.Effect>
+                        <DropShadowEffect BlurRadius="0" Direction="315" Color="Black" ShadowDepth="3"/>
+                    </Label.Effect>
+                </Label>
+                <Label x:Name="lblPaineDress" Content="Warrior" HorizontalAlignment="Left" Margin="1150,538,0,0" VerticalAlignment="Top" Width="301" Foreground="#C1C1C1" FontSize="28" HorizontalContentAlignment="Center">
+                    <Label.Effect>
+                        <DropShadowEffect Direction="315" Color="Black" ShadowDepth="3"/>
+                    </Label.Effect>
+                </Label>
+            </Grid>
+            <Image x:Name="imgGilTime" HorizontalAlignment="Left" Margin="667,778,0,0" VerticalAlignment="Top" Width="343" Height="91" Source="/FFX2SaveEditor;component/Resources/GilTimePlate.png">
+                <Image.Effect>
+                    <DropShadowEffect ShadowDepth="50" Direction="315" Color="Black" Opacity="0.5" BlurRadius="0"/>
+                </Image.Effect>
+                <Image.RenderTransform>
+                    <TranslateTransform x:Name="transGilTime" X="0" Y="0" />
+                </Image.RenderTransform>
+            </Image>
+            <TextBox x:Name="tbxGil" Text="999999999" MaxLength="9" HorizontalAlignment="Left" Margin="742,789,0,0" VerticalAlignment="Top" Width="259" FontWeight="Normal" Background="{x:Null}" Foreground="#C1C1C1" FontSize="28" HorizontalContentAlignment="Right" BorderBrush="{x:Null}" KeyDown="tbxGil_KeyDown" IsEnabled="False">
+                <TextBox.Effect>
+                    <DropShadowEffect BlurRadius="0" Direction="315" Color="Black" ShadowDepth="3"/>
+                </TextBox.Effect>
+            </TextBox>
+            <TextBox x:Name="tbxPlayTime" HorizontalAlignment="Left" Height="36" Margin="823,823,0,0" TextWrapping="Wrap" Text="999 : 99 : 99" VerticalAlignment="Top" Width="178" Background="{x:Null}" Foreground="#C1C1C1" FontSize="28" HorizontalContentAlignment="Right" BorderBrush="{x:Null}" IsEnabled="False">
+                <TextBox.Effect>
+                    <DropShadowEffect BlurRadius="0" Direction="315" Color="Black" ShadowDepth="3"/>
+                </TextBox.Effect>
+            </TextBox>
+            <Image x:Name="ScrollArrowUp" Source="Resources/MoreArrow.png" Margin="929,301,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="29" Height="20" Visibility="Hidden"/>
+            <Canvas x:Name="ScrollCanvas" Width="8" Height="629" Margin="940,336,967,87.5">
+                <Rectangle x:Name="ScrollBar" Fill="Black" Height="629" Width="8" Visibility="Hidden"></Rectangle>
+                <Rectangle x:Name="ScrollSlider" Fill="White" Height="159" Width="8" Canvas.Top="235" Visibility="Hidden"></Rectangle>
+            </Canvas>
+            <Image x:Name="ScrollArrowDown" Source="Resources/MoreArrow.png" Margin="929,970,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="29" Height="20" RenderTransformOrigin="0.5,0.5" Visibility="Hidden">
+                <Image.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform Angle="180"/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </Image.RenderTransform>
+            </Image>
+            <Button Style="{StaticResource Ffx2Button}" x:Name="btnItems" HorizontalAlignment="Left" Margin="180,180,0,0" VerticalAlignment="Top" Width="360" Height="60" FontWeight="Bold" FontSize="28" Foreground="Black" GotFocus="Button_GotFocus" MouseEnter="Button_MouseEnter" Click="btnItems_Click">
+                <Button.Effect>
+                    <DropShadowEffect BlurRadius="0" ShadowDepth="10" Direction="315" Color="Black" Opacity="0.5"/>
+                </Button.Effect>
+                <TextBlock Text="Items" Foreground="#E1E1E1">
+                    <TextBlock.Effect>
+                        <DropShadowEffect BlurRadius="0" Direction="315" Color="Black" ShadowDepth="3"/>
+                    </TextBlock.Effect>
+                </TextBlock>
+                <Button.RenderTransform>
+                    <TranslateTransform x:Name="transItems" X="0" Y="0" />
+                </Button.RenderTransform>
+            </Button>
+            <Button Style="{StaticResource Ffx2Button}" x:Name="btnStoryCompletion" HorizontalAlignment="Left" Margin="180,250,0,0" VerticalAlignment="Top" Width="360" Height="60" FontWeight="Bold" FontSize="28" Foreground="Black" GotFocus="Button_GotFocus" MouseEnter="Button_MouseEnter" Click="btnStoryCompletion_Click">
+                <Button.Effect>
+                    <DropShadowEffect BlurRadius="0" ShadowDepth="10" Direction="315" Color="Black" Opacity="0.5"/>
+                </Button.Effect>
+                <TextBlock Text="Story Completion" Foreground="#E1E1E1">
+                    <TextBlock.Effect>
+                        <DropShadowEffect BlurRadius="0" Direction="315" Color="Black" ShadowDepth="3"/>
+                    </TextBlock.Effect>
+                </TextBlock>
+                <Button.RenderTransform>
+                    <TranslateTransform x:Name="transStoryCompletion" X="0" Y="0" />
+                </Button.RenderTransform>
+            </Button>
+            <Button Style="{StaticResource Ffx2Button}" x:Name="btnEquip" HorizontalAlignment="Left" Margin="180,320,0,0" VerticalAlignment="Top" Width="360" Height="60" FontWeight="Bold" FontSize="28" Foreground="Black" GotFocus="Button_GotFocus" MouseEnter="Button_MouseEnter" Click="btnEquip_Click">
+                <Button.Effect>
+                    <DropShadowEffect BlurRadius="0" ShadowDepth="10" Direction="315" Color="Black" Opacity="0.5"/>
+                </Button.Effect>
+                <TextBlock Text="Equip" Foreground="#373737">
+                    <TextBlock.Effect>
+                        <DropShadowEffect BlurRadius="0" Direction="315" Color="Black" ShadowDepth="3"/>
+                    </TextBlock.Effect>
+                </TextBlock>
+                <Button.RenderTransform>
+                    <TranslateTransform x:Name="transEquip" X="0" Y="0" />
+                </Button.RenderTransform>
+            </Button>
+            <Button Style="{StaticResource Ffx2Button}" x:Name="btnGarmentGrid" HorizontalAlignment="Left" Margin="180,390,0,0" VerticalAlignment="Top" Width="360" Height="60" FontWeight="Bold" FontSize="28" Foreground="Black" GotFocus="Button_GotFocus" MouseEnter="Button_MouseEnter" Click="btnGarmentGrid_Click">
+                <Button.Effect>
+                    <DropShadowEffect BlurRadius="0" ShadowDepth="10" Direction="315" Color="Black" Opacity="0.5"/>
+                </Button.Effect>
+                <TextBlock Text="Garment Grid" Foreground="#E1E1E1">
+                    <TextBlock.Effect>
+                        <DropShadowEffect BlurRadius="0" Direction="315" Color="Black" ShadowDepth="3"/>
+                    </TextBlock.Effect>
+                </TextBlock>
+                <Button.RenderTransform>
+                    <TranslateTransform x:Name="transGarmentGrid" X="0" Y="0" />
+                </Button.RenderTransform>
+            </Button>
+            <Button Style="{StaticResource Ffx2Button}" x:Name="btnAbilities" HorizontalAlignment="Left" Margin="180,460,0,0" VerticalAlignment="Top" Width="360" Height="60" FontWeight="Bold" FontSize="28" Foreground="Black" GotFocus="Button_GotFocus" MouseEnter="Button_MouseEnter" Click="btnAbilities_Click">
+                <Button.Effect>
+                    <DropShadowEffect BlurRadius="0" ShadowDepth="10" Direction="315" Color="Black" Opacity="0.5"/>
+                </Button.Effect>
+                <TextBlock Text="Abilities" Foreground="#e1e1e1">
+                    <TextBlock.Effect>
+                        <DropShadowEffect BlurRadius="0" Direction="315" Color="Black" ShadowDepth="3"/>
+                    </TextBlock.Effect>
+                </TextBlock>
+                <Button.RenderTransform>
+                    <TranslateTransform x:Name="transAbilities" X="0" Y="0" />
+                </Button.RenderTransform>
+            </Button>
+            <Button Style="{StaticResource Ffx2Button}" x:Name="btnAccessories" HorizontalAlignment="Left" Margin="180,530,0,0" VerticalAlignment="Top" Width="360" Height="60" GotFocus="Button_GotFocus" MouseEnter="Button_MouseEnter" MouseDown="btnAccessories_MouseDown" Click="btnAccessories_Click">
+                <Button.Effect>
+                    <DropShadowEffect BlurRadius="0" ShadowDepth="10" Direction="315" Color="Black" Opacity="0.5"/>
+                </Button.Effect>
+                <TextBlock Text="Accessories" Foreground="#E1E1E1" FontWeight="Bold" FontSize="28" HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <TextBlock.Effect>
+                        <DropShadowEffect BlurRadius="0" Direction="315" Color="Black" ShadowDepth="3"/>
+                    </TextBlock.Effect>
+                </TextBlock>
+                <Button.RenderTransform>
+                    <TranslateTransform x:Name="transAccessories" X="0" Y="0" />
+                </Button.RenderTransform>
+            </Button>
+            <Button Style="{StaticResource Ffx2Button}" x:Name="btnDresspheres" Cursor="Hand" HorizontalAlignment="Left" Margin="180,600,0,0" VerticalAlignment="Top" Width="360" Height="60" FontWeight="Bold" FontSize="28" GotFocus="Button_GotFocus" MouseEnter="Button_MouseEnter" MouseDown="btnDresspheres_MouseDown" Click="btnDresspheres_Click">
+                <Button.Effect>
+                    <DropShadowEffect BlurRadius="0" ShadowDepth="10" Direction="315" Color="Black" Opacity="0.5"/>
+                </Button.Effect>
+                <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Text="Dresspheres" Foreground="#E1E1E1">
+                    <TextBlock.Effect>
+                        <DropShadowEffect BlurRadius="0" Direction="315" Color="Black" ShadowDepth="3"/>
+                    </TextBlock.Effect>
+                </TextBlock>
+                <Button.RenderTransform>
+                    <TranslateTransform x:Name="transDresspheres" X="0" Y="0" />
+                </Button.RenderTransform>
+            </Button>
+            <Button Style="{StaticResource Ffx2Button}" x:Name="btnMiniGames" Cursor="Hand" HorizontalAlignment="Left" Margin="180,670,0,0" VerticalAlignment="Top" Width="360" Height="60" FontWeight="Bold" FontSize="28" GotFocus="Button_GotFocus" MouseEnter="Button_MouseEnter" Click="btnMiniGames_Click">
+                <Button.Effect>
+                    <DropShadowEffect BlurRadius="0" ShadowDepth="10" Direction="315" Color="Black" Opacity="0.5"/>
+                </Button.Effect>
+                <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Text="Mini-Games" Foreground="#373737">
+                    <TextBlock.Effect>
+                        <DropShadowEffect BlurRadius="0" Direction="315" Color="Black" ShadowDepth="3"/>
+                    </TextBlock.Effect>
+                </TextBlock>
+                <Button.RenderTransform>
+                    <TranslateTransform x:Name="transMiniGames" X="0" Y="0" />
+                </Button.RenderTransform>
+            </Button>
+            <Button Style="{StaticResource Ffx2Button}" x:Name="btnSidequests" Cursor="Hand" HorizontalAlignment="Left" Margin="180,740,0,0" VerticalAlignment="Top" Width="360" Height="60" FontWeight="Bold" FontSize="28" GotFocus="Button_GotFocus" MouseEnter="Button_MouseEnter" Click="btnSidequests_Click">
+                <Button.Effect>
+                    <DropShadowEffect BlurRadius="0" ShadowDepth="10" Direction="315" Color="Black" Opacity="0.5"/>
+                </Button.Effect>
+                <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Text="Sidequests" Foreground="#373737">
+                    <TextBlock.Effect>
+                        <DropShadowEffect BlurRadius="0" Direction="315" Color="Black" ShadowDepth="3"/>
+                    </TextBlock.Effect>
+                </TextBlock>
+                <Button.RenderTransform>
+                    <TranslateTransform x:Name="transSidequests" X="0" Y="0" />
+                </Button.RenderTransform>
+            </Button>
+            <Button Style="{StaticResource Ffx2Button}" x:Name="btnConfig" Cursor="Hand" HorizontalAlignment="Left" Margin="180,810,0,0" VerticalAlignment="Top" Width="360" Height="60" FontWeight="Bold" FontSize="28" GotFocus="Button_GotFocus" MouseEnter="Button_MouseEnter" Click="btnConfig_Click">
+                <Button.Effect>
+                    <DropShadowEffect BlurRadius="0" ShadowDepth="10" Direction="315" Color="Black" Opacity="0.5"/>
+                </Button.Effect>
+                <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Text="Config" Foreground="#373737">
+                    <TextBlock.Effect>
+                        <DropShadowEffect BlurRadius="0" Direction="315" Color="Black" ShadowDepth="3"/>
+                    </TextBlock.Effect>
+                </TextBlock>
+                <Button.RenderTransform>
+                    <TranslateTransform x:Name="transConfig" X="0" Y="0" />
+                </Button.RenderTransform>
+            </Button>
+        </Grid>
+        <Grid Name="ItemPage" MouseWheel="MainPage_MouseWheel" KeyDown="MainPage_KeyDown">
+            <Image Name="itemHeader1" HorizontalAlignment="Left" Height="39" Margin="166,281,0,0" VerticalAlignment="Top" Width="742" Source="/FFX2SaveEditor;component/Resources/ItemHeader.png">
+                <Image.RenderTransform>
+                    <TranslateTransform x:Name="transItemHeader1" X="0" Y="4096" />
+                </Image.RenderTransform>
+            </Image>
+            <Image Name="itemHeader2" HorizontalAlignment="Left" Height="39" Margin="994,281,0,0" VerticalAlignment="Top" Width="742" Source="/FFX2SaveEditor;component/Resources/ItemHeader.png">
+                <Image.RenderTransform>
+                    <TranslateTransform x:Name="transItemHeader2" X="0" Y="4096" />
+                </Image.RenderTransform>
+            </Image>
+            <Grid x:Name="imgItem1" Cursor="Hand" HorizontalAlignment="Left" Height="57" Margin="166,320,0,0" VerticalAlignment="Top" Width="742" PreviewMouseDown="item_PreviewMouseDown">
+                <Grid.Background>
+                    <ImageBrush ImageSource="/FFX2SaveEditor;component/Resources/LongBar.png"/>
+                </Grid.Background>
+                <Image Name="iconItem1" Source="/FFX2SaveEditor;component/Resources/Potion.png" Width="30" Height="33" HorizontalAlignment="Left" Margin="25,0,0,0" />
+                <TextBlock Name="txtItem1" VerticalAlignment="Center" Margin="65,0,0,0" HorizontalAlignment="Left" Text="Potion" Foreground="#E1E1E1" FontSize="24" FontWeight="Bold">
+                    <TextBlock.Effect>
+                        <DropShadowEffect BlurRadius="0" Direction="315" Color="Black" ShadowDepth="3"/>
+                    </TextBlock.Effect>
+                </TextBlock>
+                <TextBlock Name="txtItemQty1" VerticalAlignment="Center" Margin="0,0,20,0" HorizontalAlignment="Right" TextAlignment="Right" Width="103" Text="99" Foreground="#E1E1E1" FontSize="24" FontWeight="Bold">
+                    <TextBlock.Effect>
+                        <DropShadowEffect BlurRadius="0" Direction="315" Color="Black" ShadowDepth="3"/>
+                    </TextBlock.Effect>
+                </TextBlock>
+                <Grid.RenderTransform>
+                    <TranslateTransform x:Name="transItem1" X="0" Y="4096" />
+                </Grid.RenderTransform>
+            </Grid>
+            <Grid x:Name="imgItem2" Cursor="Hand" HorizontalAlignment="Left" Height="57" Margin="994,320,0,0" VerticalAlignment="Top" Width="742" PreviewMouseDown="item_PreviewMouseDown">
+                <Grid.Background>
+                    <ImageBrush ImageSource="/FFX2SaveEditor;component/Resources/LongBar.png"/>
+                </Grid.Background>
+                <Image Name="iconItem2" Source="/FFX2SaveEditor;component/Resources/Potion.png" Width="30" Height="33" HorizontalAlignment="Left" Margin="25,0,0,0"/>
+                <TextBlock Name="txtItem2" VerticalAlignment="Center" Margin="65,0,0,0" HorizontalAlignment="Left" Text="Hi-Potion" Foreground="#E1E1E1" FontSize="24" FontWeight="Bold">
+                    <TextBlock.Effect>
+                        <DropShadowEffect BlurRadius="0" Direction="315" Color="Black" ShadowDepth="3"/>
+                    </TextBlock.Effect>
+                </TextBlock>
+                <TextBlock Name="txtItemQty2" VerticalAlignment="Center" Margin="0,0,20,0" HorizontalAlignment="Right" TextAlignment="Right" Width="103" Text="99" Foreground="#E1E1E1" FontSize="24" FontWeight="Bold">
+                    <TextBlock.Effect>
+                        <DropShadowEffect BlurRadius="0" Direction="315" Color="Black" ShadowDepth="3"/>
+                    </TextBlock.Effect>
+                </TextBlock>
+                <Grid.RenderTransform>
+                    <TranslateTransform x:Name="transItem2" X="0" Y="4096" />
+                </Grid.RenderTransform>
+            </Grid>
+            <Grid x:Name="imgItem3" Cursor="Hand" HorizontalAlignment="Left" Height="57" Margin="166,377,0,0" VerticalAlignment="Top" Width="742" PreviewMouseDown="item_PreviewMouseDown">
+                <Grid.Background>
+                    <ImageBrush ImageSource="/FFX2SaveEditor;component/Resources/LongBar.png"/>
+                </Grid.Background>
+                <Image Name="iconItem3" Source="/FFX2SaveEditor;component/Resources/Potion.png" Width="30" Height="33" HorizontalAlignment="Left" Margin="25,0,0,0"/>
+                <TextBlock Name="txtItem3" VerticalAlignment="Center" Margin="65,0,0,0" HorizontalAlignment="Left" Text="Ether" Foreground="#E1E1E1" FontSize="24" FontWeight="Bold">
+                    <TextBlock.Effect>
+                        <DropShadowEffect BlurRadius="0" Direction="315" Color="Black" ShadowDepth="3"/>
+                    </TextBlock.Effect>
+                </TextBlock>
+                <TextBlock Name="txtItemQty3" VerticalAlignment="Center" Margin="0,0,20,0" HorizontalAlignment="Right" TextAlignment="Right" Width="103" Text="99" Foreground="#E1E1E1" FontSize="24" FontWeight="Bold">
+                    <TextBlock.Effect>
+                        <DropShadowEffect BlurRadius="0" Direction="315" Color="Black" ShadowDepth="3"/>
+                    </TextBlock.Effect>
+                </TextBlock>
+                <Grid.RenderTransform>
+                    <TranslateTransform x:Name="transItem3" X="0" Y="4096" />
+                </Grid.RenderTransform>
+            </Grid>
+            <Grid x:Name="imgItem4" Cursor="Hand" HorizontalAlignment="Left" Height="57" Margin="994,377,0,0" VerticalAlignment="Top" Width="742" PreviewMouseDown="item_PreviewMouseDown">
+                <Grid.Background>
+                    <ImageBrush ImageSource="/FFX2SaveEditor;component/Resources/LongBar.png"/>
+                </Grid.Background>
+                <Image Name="iconItem4" Source="/FFX2SaveEditor;component/Resources/Potion.png" Width="30" Height="33" HorizontalAlignment="Left" Margin="25,0,0,0"/>
+                <TextBlock Name="txtItem4" VerticalAlignment="Center" Margin="65,0,0,0" HorizontalAlignment="Left" Text="Turbo Ether" Foreground="#E1E1E1" FontSize="24" FontWeight="Bold">
+                    <TextBlock.Effect>
+                        <DropShadowEffect BlurRadius="0" Direction="315" Color="Black" ShadowDepth="3"/>
+                    </TextBlock.Effect>
+                </TextBlock>
+                <TextBlock Name="txtItemQty4" VerticalAlignment="Center" Margin="0,0,20,0" HorizontalAlignment="Right" TextAlignment="Right" Width="103" Text="99" Foreground="#E1E1E1" FontSize="24" FontWeight="Bold">
+                    <TextBlock.Effect>
+                        <DropShadowEffect BlurRadius="0" Direction="315" Color="Black" ShadowDepth="3"/>
+                    </TextBlock.Effect>
+                </TextBlock>
+                <Grid.RenderTransform>
+                    <TranslateTransform x:Name="transItem4" X="0" Y="4096" />
+                </Grid.RenderTransform>
+            </Grid>
+            <Grid x:Name="imgItem5" Cursor="Hand" HorizontalAlignment="Left" Height="57" Margin="166,434,0,0" VerticalAlignment="Top" Width="742" PreviewMouseDown="item_PreviewMouseDown">
+                <Grid.Background>
+                    <ImageBrush ImageSource="/FFX2SaveEditor;component/Resources/LongBar.png"/>
+                </Grid.Background>
+                <Image Name="iconItem5" Source="/FFX2SaveEditor;component/Resources/Potion.png" Width="30" Height="33" HorizontalAlignment="Left" Margin="25,0,0,0"/>
+                <TextBlock Name="txtItem5" VerticalAlignment="Center" Margin="65,0,0,0" HorizontalAlignment="Left" Text="Ether" Foreground="#E1E1E1" FontSize="24" FontWeight="Bold">
+                    <TextBlock.Effect>
+                        <DropShadowEffect BlurRadius="0" Direction="315" Color="Black" ShadowDepth="3"/>
+                    </TextBlock.Effect>
+                </TextBlock>
+                <TextBlock Name="txtItemQty5" VerticalAlignment="Center" Margin="0,0,20,0" HorizontalAlignment="Right" TextAlignment="Right" Width="103" Text="99" Foreground="#E1E1E1" FontSize="24" FontWeight="Bold">
+                    <TextBlock.Effect>
+                        <DropShadowEffect BlurRadius="0" Direction="315" Color="Black" ShadowDepth="3"/>
+                    </TextBlock.Effect>
+                </TextBlock>
+                <Grid.RenderTransform>
+                    <TranslateTransform x:Name="transItem5" X="0" Y="4096" />
+                </Grid.RenderTransform>
+            </Grid>
+            <Grid x:Name="imgItem6" Cursor="Hand" HorizontalAlignment="Left" Height="57" Margin="994,434,0,0" VerticalAlignment="Top" Width="742" PreviewMouseDown="item_PreviewMouseDown">
+                <Grid.Background>
+                    <ImageBrush ImageSource="/FFX2SaveEditor;component/Resources/LongBar.png"/>
+                </Grid.Background>
+                <Image Name="iconItem6" Source="/FFX2SaveEditor;component/Resources/Potion.png" Width="30" Height="33" HorizontalAlignment="Left" Margin="25,0,0,0"/>
+                <TextBlock Name="txtItem6" VerticalAlignment="Center" Margin="65,0,0,0" HorizontalAlignment="Left" Text="Turbo Ether" Foreground="#E1E1E1" FontSize="24" FontWeight="Bold">
+                    <TextBlock.Effect>
+                        <DropShadowEffect BlurRadius="0" Direction="315" Color="Black" ShadowDepth="3"/>
+                    </TextBlock.Effect>
+                </TextBlock>
+                <TextBlock Name="txtItemQty6" VerticalAlignment="Center" Margin="0,0,20,0" HorizontalAlignment="Right" TextAlignment="Right" Width="103" Text="99" Foreground="#E1E1E1" FontSize="24" FontWeight="Bold">
+                    <TextBlock.Effect>
+                        <DropShadowEffect BlurRadius="0" Direction="315" Color="Black" ShadowDepth="3"/>
+                    </TextBlock.Effect>
+                </TextBlock>
+                <Grid.RenderTransform>
+                    <TranslateTransform x:Name="transItem6" X="0" Y="4096" />
+                </Grid.RenderTransform>
+            </Grid>
+            <Grid x:Name="imgItem7" Cursor="Hand" HorizontalAlignment="Left" Height="57" Margin="166,491,0,0" VerticalAlignment="Top" Width="742" PreviewMouseDown="item_PreviewMouseDown">
+                <Grid.Background>
+                    <ImageBrush ImageSource="/FFX2SaveEditor;component/Resources/LongBar.png"/>
+                </Grid.Background>
+                <Image Name="iconItem7" Source="/FFX2SaveEditor;component/Resources/Potion.png" Width="30" Height="33" HorizontalAlignment="Left" Margin="25,0,0,0"/>
+                <TextBlock Name="txtItem7" VerticalAlignment="Center" Margin="65,0,0,0" HorizontalAlignment="Left" Text="Ether" Foreground="#E1E1E1" FontSize="24" FontWeight="Bold">
+                    <TextBlock.Effect>
+                        <DropShadowEffect BlurRadius="0" Direction="315" Color="Black" ShadowDepth="3"/>
+                    </TextBlock.Effect>
+                </TextBlock>
+                <TextBlock Name="txtItemQty7" VerticalAlignment="Center" Margin="0,0,20,0" HorizontalAlignment="Right" TextAlignment="Right" Width="103" Text="99" Foreground="#E1E1E1" FontSize="24" FontWeight="Bold">
+                    <TextBlock.Effect>
+                        <DropShadowEffect BlurRadius="0" Direction="315" Color="Black" ShadowDepth="3"/>
+                    </TextBlock.Effect>
+                </TextBlock>
+                <Grid.RenderTransform>
+                    <TranslateTransform x:Name="transItem7" X="0" Y="4096" />
+                </Grid.RenderTransform>
+            </Grid>
+            <Grid x:Name="imgItem8" Cursor="Hand" HorizontalAlignment="Left" Height="57" Margin="994,491,0,0" VerticalAlignment="Top" Width="742" PreviewMouseDown="item_PreviewMouseDown">
+                <Grid.Background>
+                    <ImageBrush ImageSource="/FFX2SaveEditor;component/Resources/LongBar.png"/>
+                </Grid.Background>
+                <Image Name="iconItem8" Source="/FFX2SaveEditor;component/Resources/Potion.png" Width="30" Height="33" HorizontalAlignment="Left" Margin="25,0,0,0"/>
+                <TextBlock Name="txtItem8" VerticalAlignment="Center" Margin="65,0,0,0" HorizontalAlignment="Left" Text="Turbo Ether" Foreground="#E1E1E1" FontSize="24" FontWeight="Bold">
+                    <TextBlock.Effect>
+                        <DropShadowEffect BlurRadius="0" Direction="315" Color="Black" ShadowDepth="3"/>
+                    </TextBlock.Effect>
+                </TextBlock>
+                <TextBlock Name="txtItemQty8" VerticalAlignment="Center" Margin="0,0,20,0" HorizontalAlignment="Right" TextAlignment="Right" Width="103" Text="99" Foreground="#E1E1E1" FontSize="24" FontWeight="Bold">
+                    <TextBlock.Effect>
+                        <DropShadowEffect BlurRadius="0" Direction="315" Color="Black" ShadowDepth="3"/>
+                    </TextBlock.Effect>
+                </TextBlock>
+                <Grid.RenderTransform>
+                    <TranslateTransform x:Name="transItem8" X="0" Y="4096" />
+                </Grid.RenderTransform>
+            </Grid>
+            <Grid x:Name="imgItem9" Cursor="Hand" HorizontalAlignment="Left" Height="57" Margin="166,548,0,0" VerticalAlignment="Top" Width="742" PreviewMouseDown="item_PreviewMouseDown">
+                <Grid.Background>
+                    <ImageBrush ImageSource="/FFX2SaveEditor;component/Resources/LongBar.png"/>
+                </Grid.Background>
+                <Image Name="iconItem9" Source="/FFX2SaveEditor;component/Resources/Potion.png" Width="30" Height="33" HorizontalAlignment="Left" Margin="25,0,0,0"/>
+                <TextBlock Name="txtItem9" VerticalAlignment="Center" Margin="65,0,0,0" HorizontalAlignment="Left" Text="Ether" Foreground="#E1E1E1" FontSize="24" FontWeight="Bold">
+                    <TextBlock.Effect>
+                        <DropShadowEffect BlurRadius="0" Direction="315" Color="Black" ShadowDepth="3"/>
+                    </TextBlock.Effect>
+                </TextBlock>
+                <TextBlock Name="txtItemQty9" VerticalAlignment="Center" Margin="0,0,20,0" HorizontalAlignment="Right" TextAlignment="Right" Width="103" Text="99" Foreground="#E1E1E1" FontSize="24" FontWeight="Bold">
+                    <TextBlock.Effect>
+                        <DropShadowEffect BlurRadius="0" Direction="315" Color="Black" ShadowDepth="3"/>
+                    </TextBlock.Effect>
+                </TextBlock>
+                <Grid.RenderTransform>
+                    <TranslateTransform x:Name="transItem9" X="0" Y="4096" />
+                </Grid.RenderTransform>
+            </Grid>
+            <Grid x:Name="imgItem10" Cursor="Hand" HorizontalAlignment="Left" Height="57" Margin="994,548,0,0" VerticalAlignment="Top" Width="742" PreviewMouseDown="item_PreviewMouseDown">
+                <Grid.Background>
+                    <ImageBrush ImageSource="/FFX2SaveEditor;component/Resources/LongBar.png"/>
+                </Grid.Background>
+                <Image Name="iconItem10" Source="/FFX2SaveEditor;component/Resources/Potion.png" Width="30" Height="33" HorizontalAlignment="Left" Margin="25,0,0,0"/>
+                <TextBlock Name="txtItem10" VerticalAlignment="Center" Margin="65,0,0,0" HorizontalAlignment="Left" Text="Turbo Ether" Foreground="#E1E1E1" FontSize="24" FontWeight="Bold">
+                    <TextBlock.Effect>
+                        <DropShadowEffect BlurRadius="0" Direction="315" Color="Black" ShadowDepth="3"/>
+                    </TextBlock.Effect>
+                </TextBlock>
+                <TextBlock Name="txtItemQty10" VerticalAlignment="Center" Margin="0,0,20,0" HorizontalAlignment="Right" TextAlignment="Right" Width="103" Text="99" Foreground="#E1E1E1" FontSize="24" FontWeight="Bold">
+                    <TextBlock.Effect>
+                        <DropShadowEffect BlurRadius="0" Direction="315" Color="Black" ShadowDepth="3"/>
+                    </TextBlock.Effect>
+                </TextBlock>
+                <Grid.RenderTransform>
+                    <TranslateTransform x:Name="transItem10" X="0" Y="4096" />
+                </Grid.RenderTransform>
+            </Grid>
+            <Grid x:Name="imgItem11" Cursor="Hand" HorizontalAlignment="Left" Height="57" Margin="166,605,0,0" VerticalAlignment="Top" Width="742" PreviewMouseDown="item_PreviewMouseDown">
+                <Grid.Background>
+                    <ImageBrush ImageSource="/FFX2SaveEditor;component/Resources/LongBar.png"/>
+                </Grid.Background>
+                <Image Name="iconItem11" Source="/FFX2SaveEditor;component/Resources/Potion.png" Width="30" Height="33" HorizontalAlignment="Left" Margin="25,0,0,0"/>
+                <TextBlock Name="txtItem11" VerticalAlignment="Center" Margin="65,0,0,0" HorizontalAlignment="Left" Text="Ether" Foreground="#E1E1E1" FontSize="24" FontWeight="Bold">
+                    <TextBlock.Effect>
+                        <DropShadowEffect BlurRadius="0" Direction="315" Color="Black" ShadowDepth="3"/>
+                    </TextBlock.Effect>
+                </TextBlock>
+                <TextBlock Name="txtItemQty11" VerticalAlignment="Center" Margin="0,0,20,0" HorizontalAlignment="Right" TextAlignment="Right" Width="103" Text="99" Foreground="#E1E1E1" FontSize="24" FontWeight="Bold">
+                    <TextBlock.Effect>
+                        <DropShadowEffect BlurRadius="0" Direction="315" Color="Black" ShadowDepth="3"/>
+                    </TextBlock.Effect>
+                </TextBlock>
+                <Grid.RenderTransform>
+                    <TranslateTransform x:Name="transItem11" X="0" Y="4096" />
+                </Grid.RenderTransform>
+            </Grid>
+            <Grid x:Name="imgItem12" Cursor="Hand" HorizontalAlignment="Left" Height="57" Margin="994,605,0,0" VerticalAlignment="Top" Width="742" PreviewMouseDown="item_PreviewMouseDown">
+                <Grid.Background>
+                    <ImageBrush ImageSource="/FFX2SaveEditor;component/Resources/LongBar.png"/>
+                </Grid.Background>
+                <Image Name="iconItem12" Source="/FFX2SaveEditor;component/Resources/Potion.png" Width="30" Height="33" HorizontalAlignment="Left" Margin="25,0,0,0"/>
+                <TextBlock Name="txtItem12" VerticalAlignment="Center" Margin="65,0,0,0" HorizontalAlignment="Left" Text="Turbo Ether" Foreground="#E1E1E1" FontSize="24" FontWeight="Bold">
+                    <TextBlock.Effect>
+                        <DropShadowEffect BlurRadius="0" Direction="315" Color="Black" ShadowDepth="3"/>
+                    </TextBlock.Effect>
+                </TextBlock>
+                <TextBlock Name="txtItemQty12" VerticalAlignment="Center" Margin="0,0,20,0" HorizontalAlignment="Right" TextAlignment="Right" Width="103" Text="99" Foreground="#E1E1E1" FontSize="24" FontWeight="Bold">
+                    <TextBlock.Effect>
+                        <DropShadowEffect BlurRadius="0" Direction="315" Color="Black" ShadowDepth="3"/>
+                    </TextBlock.Effect>
+                </TextBlock>
+                <Grid.RenderTransform>
+                    <TranslateTransform x:Name="transItem12" X="0" Y="4096" />
+                </Grid.RenderTransform>
+            </Grid>
+            <Grid x:Name="imgItem13" Cursor="Hand" HorizontalAlignment="Left" Height="57" Margin="166,662,0,0" VerticalAlignment="Top" Width="742" PreviewMouseDown="item_PreviewMouseDown">
+                <Grid.Background>
+                    <ImageBrush ImageSource="/FFX2SaveEditor;component/Resources/LongBar.png"/>
+                </Grid.Background>
+                <Image Name="iconItem13" Source="/FFX2SaveEditor;component/Resources/Potion.png" Width="30" Height="33" HorizontalAlignment="Left" Margin="25,0,0,0"/>
+                <TextBlock Name="txtItem13" VerticalAlignment="Center" Margin="65,0,0,0" HorizontalAlignment="Left" Text="Ether" Foreground="#E1E1E1" FontSize="24" FontWeight="Bold">
+                    <TextBlock.Effect>
+                        <DropShadowEffect BlurRadius="0" Direction="315" Color="Black" ShadowDepth="3"/>
+                    </TextBlock.Effect>
+                </TextBlock>
+                <TextBlock Name="txtItemQty13" VerticalAlignment="Center" Margin="0,0,20,0" HorizontalAlignment="Right" TextAlignment="Right" Width="103" Text="99" Foreground="#E1E1E1" FontSize="24" FontWeight="Bold">
+                    <TextBlock.Effect>
+                        <DropShadowEffect BlurRadius="0" Direction="315" Color="Black" ShadowDepth="3"/>
+                    </TextBlock.Effect>
+                </TextBlock>
+                <Grid.RenderTransform>
+                    <TranslateTransform x:Name="transItem13" X="0" Y="4096" />
+                </Grid.RenderTransform>
+            </Grid>
+            <Grid x:Name="imgItem14" Cursor="Hand" HorizontalAlignment="Left" Height="57" Margin="994,662,0,0" VerticalAlignment="Top" Width="742" PreviewMouseDown="item_PreviewMouseDown">
+                <Grid.Background>
+                    <ImageBrush ImageSource="/FFX2SaveEditor;component/Resources/LongBar.png"/>
+                </Grid.Background>
+                <Image Name="iconItem14" Source="/FFX2SaveEditor;component/Resources/Potion.png" Width="30" Height="33" HorizontalAlignment="Left" Margin="25,0,0,0"/>
+                <TextBlock Name="txtItem14" VerticalAlignment="Center" Margin="65,0,0,0" HorizontalAlignment="Left" Text="Turbo Ether" Foreground="#E1E1E1" FontSize="24" FontWeight="Bold">
+                    <TextBlock.Effect>
+                        <DropShadowEffect BlurRadius="0" Direction="315" Color="Black" ShadowDepth="3"/>
+                    </TextBlock.Effect>
+                </TextBlock>
+                <TextBlock Name="txtItemQty14" VerticalAlignment="Center" Margin="0,0,20,0" HorizontalAlignment="Right" TextAlignment="Right" Width="103" Text="99" Foreground="#E1E1E1" FontSize="24" FontWeight="Bold">
+                    <TextBlock.Effect>
+                        <DropShadowEffect BlurRadius="0" Direction="315" Color="Black" ShadowDepth="3"/>
+                    </TextBlock.Effect>
+                </TextBlock>
+                <Grid.RenderTransform>
+                    <TranslateTransform x:Name="transItem14" X="0" Y="4096" />
+                </Grid.RenderTransform>
+            </Grid>
+            <Grid x:Name="imgItem15" Cursor="Hand" HorizontalAlignment="Left" Height="57" Margin="166,719,0,0" VerticalAlignment="Top" Width="742" PreviewMouseDown="item_PreviewMouseDown">
+                <Grid.Background>
+                    <ImageBrush ImageSource="/FFX2SaveEditor;component/Resources/LongBar.png"/>
+                </Grid.Background>
+                <Image Name="iconItem15" Source="/FFX2SaveEditor;component/Resources/Potion.png" Width="30" Height="33" HorizontalAlignment="Left" Margin="25,0,0,0"/>
+                <TextBlock Name="txtItem15" VerticalAlignment="Center" Margin="65,0,0,0" HorizontalAlignment="Left" Text="Ether" Foreground="#E1E1E1" FontSize="24" FontWeight="Bold">
+                    <TextBlock.Effect>
+                        <DropShadowEffect BlurRadius="0" Direction="315" Color="Black" ShadowDepth="3"/>
+                    </TextBlock.Effect>
+                </TextBlock>
+                <TextBlock Name="txtItemQty15" VerticalAlignment="Center" Margin="0,0,20,0" HorizontalAlignment="Right" TextAlignment="Right" Width="103" Text="99" Foreground="#E1E1E1" FontSize="24" FontWeight="Bold">
+                    <TextBlock.Effect>
+                        <DropShadowEffect BlurRadius="0" Direction="315" Color="Black" ShadowDepth="3"/>
+                    </TextBlock.Effect>
+                </TextBlock>
+                <Grid.RenderTransform>
+                    <TranslateTransform x:Name="transItem15" X="0" Y="4096" />
+                </Grid.RenderTransform>
+            </Grid>
+            <Grid x:Name="imgItem16" Cursor="Hand" HorizontalAlignment="Left" Height="57" Margin="994,719,0,0" VerticalAlignment="Top" Width="742" PreviewMouseDown="item_PreviewMouseDown">
+                <Grid.Background>
+                    <ImageBrush ImageSource="/FFX2SaveEditor;component/Resources/LongBar.png"/>
+                </Grid.Background>
+                <Image Name="iconItem16" Source="/FFX2SaveEditor;component/Resources/Potion.png" Width="30" Height="33" HorizontalAlignment="Left" Margin="25,0,0,0"/>
+                <TextBlock Name="txtItem16" VerticalAlignment="Center" Margin="65,0,0,0" HorizontalAlignment="Left" Text="Turbo Ether" Foreground="#E1E1E1" FontSize="24" FontWeight="Bold">
+                    <TextBlock.Effect>
+                        <DropShadowEffect BlurRadius="0" Direction="315" Color="Black" ShadowDepth="3"/>
+                    </TextBlock.Effect>
+                </TextBlock>
+                <TextBlock Name="txtItemQty16" VerticalAlignment="Center" Margin="0,0,20,0" HorizontalAlignment="Right" TextAlignment="Right" Width="103" Text="99" Foreground="#E1E1E1" FontSize="24" FontWeight="Bold">
+                    <TextBlock.Effect>
+                        <DropShadowEffect BlurRadius="0" Direction="315" Color="Black" ShadowDepth="3"/>
+                    </TextBlock.Effect>
+                </TextBlock>
+                <Grid.RenderTransform>
+                    <TranslateTransform x:Name="transItem16" X="0" Y="4096" />
+                </Grid.RenderTransform>
+            </Grid>
+            <Grid x:Name="imgItem17" Cursor="Hand" HorizontalAlignment="Left" Height="57" Margin="166,776,0,0" VerticalAlignment="Top" Width="742" PreviewMouseDown="item_PreviewMouseDown">
+                <Grid.Background>
+                    <ImageBrush ImageSource="/FFX2SaveEditor;component/Resources/LongBar.png"/>
+                </Grid.Background>
+                <Image Name="iconItem17" Source="/FFX2SaveEditor;component/Resources/Potion.png" Width="30" Height="33" HorizontalAlignment="Left" Margin="25,0,0,0"/>
+                <TextBlock Name="txtItem17" VerticalAlignment="Center" Margin="65,0,0,0" HorizontalAlignment="Left" Text="Ether" Foreground="#E1E1E1" FontSize="24" FontWeight="Bold">
+                    <TextBlock.Effect>
+                        <DropShadowEffect BlurRadius="0" Direction="315" Color="Black" ShadowDepth="3"/>
+                    </TextBlock.Effect>
+                </TextBlock>
+                <TextBlock Name="txtItemQty17" VerticalAlignment="Center" Margin="0,0,20,0" HorizontalAlignment="Right" TextAlignment="Right" Width="103" Text="99" Foreground="#E1E1E1" FontSize="24" FontWeight="Bold">
+                    <TextBlock.Effect>
+                        <DropShadowEffect BlurRadius="0" Direction="315" Color="Black" ShadowDepth="3"/>
+                    </TextBlock.Effect>
+                </TextBlock>
+                <Grid.RenderTransform>
+                    <TranslateTransform x:Name="transItem17" X="0" Y="4096" />
+                </Grid.RenderTransform>
+            </Grid>
+            <Grid x:Name="imgItem18" Cursor="Hand" HorizontalAlignment="Left" Height="57" Margin="994,776,0,0" VerticalAlignment="Top" Width="742" PreviewMouseDown="item_PreviewMouseDown">
+                <Grid.Background>
+                    <ImageBrush ImageSource="/FFX2SaveEditor;component/Resources/LongBar.png"/>
+                </Grid.Background>
+                <Image Name="iconItem18" Source="/FFX2SaveEditor;component/Resources/Potion.png" Width="30" Height="33" HorizontalAlignment="Left" Margin="25,0,0,0"/>
+                <TextBlock Name="txtItem18" VerticalAlignment="Center" Margin="65,0,0,0" HorizontalAlignment="Left" Text="Turbo Ether" Foreground="#E1E1E1" FontSize="24" FontWeight="Bold">
+                    <TextBlock.Effect>
+                        <DropShadowEffect BlurRadius="0" Direction="315" Color="Black" ShadowDepth="3"/>
+                    </TextBlock.Effect>
+                </TextBlock>
+                <TextBlock Name="txtItemQty18" VerticalAlignment="Center" Margin="0,0,20,0" HorizontalAlignment="Right" TextAlignment="Right" Width="103" Text="99" Foreground="#E1E1E1" FontSize="24" FontWeight="Bold">
+                    <TextBlock.Effect>
+                        <DropShadowEffect BlurRadius="0" Direction="315" Color="Black" ShadowDepth="3"/>
+                    </TextBlock.Effect>
+                </TextBlock>
+                <Grid.RenderTransform>
+                    <TranslateTransform x:Name="transItem18" X="0" Y="4096" />
+                </Grid.RenderTransform>
+            </Grid>
+            <Grid x:Name="imgItem19" Cursor="Hand" HorizontalAlignment="Left" Height="57" Margin="166,833,0,0" VerticalAlignment="Top" Width="742" PreviewMouseDown="item_PreviewMouseDown">
+                <Grid.Background>
+                    <ImageBrush ImageSource="/FFX2SaveEditor;component/Resources/LongBar.png"/>
+                </Grid.Background>
+                <Image Name="iconItem19" Source="/FFX2SaveEditor;component/Resources/Potion.png" Width="30" Height="33" HorizontalAlignment="Left" Margin="25,0,0,0"/>
+                <TextBlock Name="txtItem19" VerticalAlignment="Center" Margin="65,0,0,0" HorizontalAlignment="Left" Text="Ether" Foreground="#E1E1E1" FontSize="24" FontWeight="Bold">
+                    <TextBlock.Effect>
+                        <DropShadowEffect BlurRadius="0" Direction="315" Color="Black" ShadowDepth="3"/>
+                    </TextBlock.Effect>
+                </TextBlock>
+                <TextBlock Name="txtItemQty19" VerticalAlignment="Center" Margin="0,0,20,0" HorizontalAlignment="Right" TextAlignment="Right" Width="103" Text="99" Foreground="#E1E1E1" FontSize="24" FontWeight="Bold">
+                    <TextBlock.Effect>
+                        <DropShadowEffect BlurRadius="0" Direction="315" Color="Black" ShadowDepth="3"/>
+                    </TextBlock.Effect>
+                </TextBlock>
+                <Grid.RenderTransform>
+                    <TranslateTransform x:Name="transItem19" X="0" Y="4096" />
+                </Grid.RenderTransform>
+            </Grid>
+            <Grid x:Name="imgItem20" Cursor="Hand" HorizontalAlignment="Left" Height="57" Margin="994,833,0,0" VerticalAlignment="Top" Width="742" PreviewMouseDown="item_PreviewMouseDown">
+                <Grid.Background>
+                    <ImageBrush ImageSource="/FFX2SaveEditor;component/Resources/LongBar.png"/>
+                </Grid.Background>
+                <Image Name="iconItem20" Source="/FFX2SaveEditor;component/Resources/Potion.png" Width="30" Height="33" HorizontalAlignment="Left" Margin="25,0,0,0"/>
+                <TextBlock Name="txtItem20" VerticalAlignment="Center" Margin="65,0,0,0" HorizontalAlignment="Left" Text="Turbo Ether" Foreground="#E1E1E1" FontSize="24" FontWeight="Bold">
+                    <TextBlock.Effect>
+                        <DropShadowEffect BlurRadius="0" Direction="315" Color="Black" ShadowDepth="3"/>
+                    </TextBlock.Effect>
+                </TextBlock>
+                <TextBlock Name="txtItemQty20" VerticalAlignment="Center" Margin="0,0,20,0" HorizontalAlignment="Right" TextAlignment="Right" Width="103" Text="99" Foreground="#E1E1E1" FontSize="24" FontWeight="Bold">
+                    <TextBlock.Effect>
+                        <DropShadowEffect BlurRadius="0" Direction="315" Color="Black" ShadowDepth="3"/>
+                    </TextBlock.Effect>
+                </TextBlock>
+                <Grid.RenderTransform>
+                    <TranslateTransform x:Name="transItem20" X="0" Y="4096" />
+                </Grid.RenderTransform>
+            </Grid>
+            <Grid x:Name="imgItem21" Cursor="Hand" HorizontalAlignment="Left" Height="57" Margin="166,890,0,0" VerticalAlignment="Top" Width="742" PreviewMouseDown="item_PreviewMouseDown">
+                <Grid.Background>
+                    <ImageBrush ImageSource="/FFX2SaveEditor;component/Resources/LongBar.png"/>
+                </Grid.Background>
+                <Image Name="iconItem21" Source="/FFX2SaveEditor;component/Resources/Potion.png" Width="30" Height="33" HorizontalAlignment="Left" Margin="25,0,0,0"/>
+                <TextBlock Name="txtItem21" VerticalAlignment="Center" Margin="65,0,0,0" HorizontalAlignment="Left" Text="Ether" Foreground="#E1E1E1" FontSize="24" FontWeight="Bold">
+                    <TextBlock.Effect>
+                        <DropShadowEffect BlurRadius="0" Direction="315" Color="Black" ShadowDepth="3"/>
+                    </TextBlock.Effect>
+                </TextBlock>
+                <TextBlock Name="txtItemQty21" VerticalAlignment="Center" Margin="0,0,20,0" HorizontalAlignment="Right" TextAlignment="Right" Width="103" Text="99" Foreground="#E1E1E1" FontSize="24" FontWeight="Bold">
+                    <TextBlock.Effect>
+                        <DropShadowEffect BlurRadius="0" Direction="315" Color="Black" ShadowDepth="3"/>
+                    </TextBlock.Effect>
+                </TextBlock>
+                <Grid.RenderTransform>
+                    <TranslateTransform x:Name="transItem21" X="0" Y="4096" />
+                </Grid.RenderTransform>
+            </Grid>
+            <Grid x:Name="imgItem22" HorizontalAlignment="Left" Height="57" Margin="994,890,0,0" VerticalAlignment="Top" Width="742" PreviewMouseDown="item_PreviewMouseDown">
+                <Grid.Background>
+                    <ImageBrush ImageSource="/FFX2SaveEditor;component/Resources/LongBar.png"/>
+                </Grid.Background>
+                <Image Name="iconItem22" Source="/FFX2SaveEditor;component/Resources/Potion.png" Width="30" Height="33" HorizontalAlignment="Left" Margin="25,0,0,0"/>
+                <TextBlock Name="txtItem22" VerticalAlignment="Center" Margin="65,0,0,0" HorizontalAlignment="Left" Text="Turbo Ether" Foreground="#E1E1E1" FontSize="24" FontWeight="Bold">
+                    <TextBlock.Effect>
+                        <DropShadowEffect BlurRadius="0" Direction="315" Color="Black" ShadowDepth="3"/>
+                    </TextBlock.Effect>
+                </TextBlock>
+                <TextBlock Name="txtItemQty22" VerticalAlignment="Center" Margin="0,0,20,0" HorizontalAlignment="Right" TextAlignment="Right" Width="103" Text="99" Foreground="#E1E1E1" FontSize="24" FontWeight="Bold">
+                    <TextBlock.Effect>
+                        <DropShadowEffect BlurRadius="0" Direction="315" Color="Black" ShadowDepth="3"/>
+                    </TextBlock.Effect>
+                </TextBlock>
+                <Grid.RenderTransform>
+                    <TranslateTransform x:Name="transItem22" X="0" Y="4096" />
+                </Grid.RenderTransform>
+            </Grid>
+            <Button Style="{StaticResource Ffx2Button}" x:Name="btnAllItems" HorizontalAlignment="Left" Margin="1373,180,0,0" VerticalAlignment="Top" Width="360" Height="60" FontWeight="Bold" FontSize="28" Foreground="Black" GotFocus="Button_GotFocus" MouseEnter="Button_MouseEnter" Click="btnAllItems_Click">
+                <Button.Effect>
+                    <DropShadowEffect BlurRadius="0" ShadowDepth="10" Direction="315" Color="Black" Opacity="0.5"/>
+                </Button.Effect>
+                <Button.RenderTransform>
+                    <TranslateTransform x:Name="btnAllItemsTrans" X="0" Y="4096" />
+                </Button.RenderTransform>
+                <TextBlock Text="Add All Items" Foreground="#E1E1E1">
+                    <TextBlock.Effect>
+                        <DropShadowEffect BlurRadius="0" Direction="315" Color="Black" ShadowDepth="3"/>
+                    </TextBlock.Effect>
+                </TextBlock>
+            </Button>
+            <Button Style="{StaticResource Ffx2Button}" x:Name="btnAllAccessories" HorizontalAlignment="Left" Margin="1373,180,0,0" VerticalAlignment="Top" Width="360" Height="60" FontWeight="Bold" FontSize="28" Foreground="Black" GotFocus="Button_GotFocus" MouseEnter="Button_MouseEnter" Click="btnAllAccessories_Click">
+                <Button.Effect>
+                    <DropShadowEffect BlurRadius="0" ShadowDepth="10" Direction="315" Color="Black" Opacity="0.5"/>
+                </Button.Effect>
+                <Button.RenderTransform>
+                    <TranslateTransform x:Name="btnAllAccTrans" X="0" Y="4096" />
+                </Button.RenderTransform>
+                <TextBlock Text="Add All Accessories" Foreground="#E1E1E1">
+                    <TextBlock.Effect>
+                        <DropShadowEffect BlurRadius="0" Direction="315" Color="Black" ShadowDepth="3"/>
+                    </TextBlock.Effect>
+                </TextBlock>
+            </Button>
+        </Grid>
+        <Grid Name="DressPage" MouseWheel="MainPage_MouseWheel" KeyDown="MainPage_KeyDown">
+            <Image x:Name="dressHeader" HorizontalAlignment="Left" Height="33" Margin="166,304,0,0" VerticalAlignment="Top" Width="742" Source="Resources/DressphereHeader.png">
+                <Image.RenderTransform>
+                    <TranslateTransform x:Name="transDressHeader" X="-1920" Y="0" />
+                </Image.RenderTransform>
+            </Image>
+            <Grid x:Name="gridDress1" Cursor="Hand" HorizontalAlignment="Left" Height="57" Margin="166,336,0,0" VerticalAlignment="Top" Width="742" PreviewMouseDown="item_PreviewMouseDown">
+                <Grid.Background>
+                    <ImageBrush ImageSource="Resources/LongBar.png"/>
+                </Grid.Background>
+                <Grid.RenderTransform>
+                    <TranslateTransform x:Name="transDress1" X="-1920" Y="0" />
+                </Grid.RenderTransform>
+                <Image x:Name="iconDress1" Source="Resources/GarmentGrid.png" Width="30" Height="33" HorizontalAlignment="Left" Margin="25,0,0,0" />
+                <TextBlock x:Name="txtDress1" VerticalAlignment="Center" Margin="65,0,0,0" HorizontalAlignment="Left" Text="Garment Grid" Foreground="#E1E1E1" FontSize="24" FontWeight="Bold">
+                    <TextBlock.Effect>
+                        <DropShadowEffect BlurRadius="0" Direction="315" Color="Black" ShadowDepth="3"/>
+                    </TextBlock.Effect>
+                </TextBlock>
+                <TextBlock x:Name="txtDressQty1" VerticalAlignment="Center" Margin="0,0,20,0" HorizontalAlignment="Right" Text="99" Foreground="#E1E1E1" FontSize="24" FontWeight="Bold">
+                    <TextBlock.Effect>
+                        <DropShadowEffect BlurRadius="0" Direction="315" Color="Black" ShadowDepth="3"/>
+                    </TextBlock.Effect>
+                </TextBlock>
+            </Grid>
+            <Grid x:Name="gridDress2" Cursor="Hand" HorizontalAlignment="Left" Height="57" Margin="166,393,0,0" VerticalAlignment="Top" Width="742" PreviewMouseDown="item_PreviewMouseDown">
+                <Grid.Background>
+                    <ImageBrush ImageSource="Resources/LongBar.png"/>
+                </Grid.Background>
+                <Grid.RenderTransform>
+                    <TranslateTransform x:Name="transDress2" X="-1920" Y="0" />
+                </Grid.RenderTransform>
+                <Image x:Name="iconDress2" Source="Resources/GarmentGrid.png" Width="30" Height="33" HorizontalAlignment="Left" Margin="25,0,0,0"/>
+                <TextBlock x:Name="txtDress2" VerticalAlignment="Center" Margin="65,0,0,0" HorizontalAlignment="Left" Text="Garment Grid" Foreground="#E1E1E1" FontSize="24" FontWeight="Bold">
+                    <TextBlock.Effect>
+                        <DropShadowEffect BlurRadius="0" Direction="315" Color="Black" ShadowDepth="3"/>
+                    </TextBlock.Effect>
+                </TextBlock>
+                <TextBlock x:Name="txtDressQty2" VerticalAlignment="Center" Margin="0,0,20,0" HorizontalAlignment="Right" Text="99" Foreground="#E1E1E1" FontSize="24" FontWeight="Bold">
+                    <TextBlock.Effect>
+                        <DropShadowEffect BlurRadius="0" Direction="315" Color="Black" ShadowDepth="3"/>
+                    </TextBlock.Effect>
+                </TextBlock>
+            </Grid>
+            <Grid x:Name="gridDress3" Cursor="Hand" HorizontalAlignment="Left" Height="57" Margin="166,450,0,0" VerticalAlignment="Top" Width="742" PreviewMouseDown="item_PreviewMouseDown">
+                <Grid.Background>
+                    <ImageBrush ImageSource="Resources/LongBar.png"/>
+                </Grid.Background>
+                <Grid.RenderTransform>
+                    <TranslateTransform x:Name="transDress3" X="-1920" Y="0" />
+                </Grid.RenderTransform>
+                <Image x:Name="iconDress3" Source="Resources/GarmentGrid.png" Width="30" Height="33" HorizontalAlignment="Left" Margin="25,0,0,0"/>
+                <TextBlock x:Name="txtDress3" VerticalAlignment="Center" Margin="65,0,0,0" HorizontalAlignment="Left" Text="Garment Grid" Foreground="#E1E1E1" FontSize="24" FontWeight="Bold">
+                    <TextBlock.Effect>
+                        <DropShadowEffect BlurRadius="0" Direction="315" Color="Black" ShadowDepth="3"/>
+                    </TextBlock.Effect>
+                </TextBlock>
+                <TextBlock x:Name="txtDressQty3" VerticalAlignment="Center" Margin="0,0,20,0" HorizontalAlignment="Right" Text="99" Foreground="#E1E1E1" FontSize="24" FontWeight="Bold">
+                    <TextBlock.Effect>
+                        <DropShadowEffect BlurRadius="0" Direction="315" Color="Black" ShadowDepth="3"/>
+                    </TextBlock.Effect>
+                </TextBlock>
+            </Grid>
+            <Grid x:Name="gridDress4" Cursor="Hand" HorizontalAlignment="Left" Height="57" Margin="166,507,0,0" VerticalAlignment="Top" Width="742" PreviewMouseDown="item_PreviewMouseDown">
+                <Grid.Background>
+                    <ImageBrush ImageSource="Resources/LongBar.png"/>
+                </Grid.Background>
+                <Grid.RenderTransform>
+                    <TranslateTransform x:Name="transDress4" X="-1920" Y="0" />
+                </Grid.RenderTransform>
+                <Image x:Name="iconDress4" Source="Resources/GarmentGrid.png" Width="30" Height="33" HorizontalAlignment="Left" Margin="25,0,0,0"/>
+                <TextBlock x:Name="txtDress4" VerticalAlignment="Center" Margin="65,0,0,0" HorizontalAlignment="Left" Text="Garment Grid" Foreground="#E1E1E1" FontSize="24" FontWeight="Bold">
+                    <TextBlock.Effect>
+                        <DropShadowEffect BlurRadius="0" Direction="315" Color="Black" ShadowDepth="3"/>
+                    </TextBlock.Effect>
+                </TextBlock>
+                <TextBlock x:Name="txtDressQty4" VerticalAlignment="Center" Margin="0,0,20,0" HorizontalAlignment="Right" Text="99" Foreground="#E1E1E1" FontSize="24" FontWeight="Bold">
+                    <TextBlock.Effect>
+                        <DropShadowEffect BlurRadius="0" Direction="315" Color="Black" ShadowDepth="3"/>
+                    </TextBlock.Effect>
+                </TextBlock>
+            </Grid>
+            <Grid x:Name="gridDress5" Cursor="Hand" HorizontalAlignment="Left" Height="57" Margin="166,564,0,0" VerticalAlignment="Top" Width="742" PreviewMouseDown="item_PreviewMouseDown">
+                <Grid.Background>
+                    <ImageBrush ImageSource="Resources/LongBar.png"/>
+                </Grid.Background>
+                <Grid.RenderTransform>
+                    <TranslateTransform x:Name="transDress5" X="-1920" Y="0" />
+                </Grid.RenderTransform>
+                <Image x:Name="iconDress5" Source="Resources/GarmentGrid.png" Width="30" Height="33" HorizontalAlignment="Left" Margin="25,0,0,0"/>
+                <TextBlock x:Name="txtDress5" VerticalAlignment="Center" Margin="65,0,0,0" HorizontalAlignment="Left" Text="Garment Grid" Foreground="#E1E1E1" FontSize="24" FontWeight="Bold">
+                    <TextBlock.Effect>
+                        <DropShadowEffect BlurRadius="0" Direction="315" Color="Black" ShadowDepth="3"/>
+                    </TextBlock.Effect>
+                </TextBlock>
+                <TextBlock x:Name="txtDressQty5" VerticalAlignment="Center" Margin="0,0,20,0" HorizontalAlignment="Right" Text="99" Foreground="#E1E1E1" FontSize="24" FontWeight="Bold">
+                    <TextBlock.Effect>
+                        <DropShadowEffect BlurRadius="0" Direction="315" Color="Black" ShadowDepth="3"/>
+                    </TextBlock.Effect>
+                </TextBlock>
+            </Grid>
+            <Grid x:Name="gridDress6" Cursor="Hand" HorizontalAlignment="Left" Height="57" Margin="166,621,0,0" VerticalAlignment="Top" Width="742" PreviewMouseDown="item_PreviewMouseDown">
+                <Grid.Background>
+                    <ImageBrush ImageSource="Resources/LongBar.png"/>
+                </Grid.Background>
+                <Grid.RenderTransform>
+                    <TranslateTransform x:Name="transDress6" X="-1920" Y="0" />
+                </Grid.RenderTransform>
+                <Image x:Name="iconDress6" Source="Resources/GarmentGrid.png" Width="30" Height="33" HorizontalAlignment="Left" Margin="25,0,0,0"/>
+                <TextBlock x:Name="txtDress6" VerticalAlignment="Center" Margin="65,0,0,0" HorizontalAlignment="Left" Text="Garment Grid" Foreground="#E1E1E1" FontSize="24" FontWeight="Bold">
+                    <TextBlock.Effect>
+                        <DropShadowEffect BlurRadius="0" Direction="315" Color="Black" ShadowDepth="3"/>
+                    </TextBlock.Effect>
+                </TextBlock>
+                <TextBlock x:Name="txtDressQty6" VerticalAlignment="Center" Margin="0,0,20,0" HorizontalAlignment="Right" Text="99" Foreground="#E1E1E1" FontSize="24" FontWeight="Bold">
+                    <TextBlock.Effect>
+                        <DropShadowEffect BlurRadius="0" Direction="315" Color="Black" ShadowDepth="3"/>
+                    </TextBlock.Effect>
+                </TextBlock>
+            </Grid>
+            <Grid x:Name="gridDress7" Cursor="Hand" HorizontalAlignment="Left" Height="57" Margin="166,678,0,0" VerticalAlignment="Top" Width="742" PreviewMouseDown="item_PreviewMouseDown">
+                <Grid.Background>
+                    <ImageBrush ImageSource="Resources/LongBar.png"/>
+                </Grid.Background>
+                <Grid.RenderTransform>
+                    <TranslateTransform x:Name="transDress7" X="-1920" Y="0" />
+                </Grid.RenderTransform>
+                <Image x:Name="iconDress7" Source="Resources/GarmentGrid.png" Width="30" Height="33" HorizontalAlignment="Left" Margin="25,0,0,0"/>
+                <TextBlock x:Name="txtDress7" VerticalAlignment="Center" Margin="65,0,0,0" HorizontalAlignment="Left" Text="Garment Grid" Foreground="#E1E1E1" FontSize="24" FontWeight="Bold">
+                    <TextBlock.Effect>
+                        <DropShadowEffect BlurRadius="0" Direction="315" Color="Black" ShadowDepth="3"/>
+                    </TextBlock.Effect>
+                </TextBlock>
+                <TextBlock x:Name="txtDressQty7" VerticalAlignment="Center" Margin="0,0,20,0" HorizontalAlignment="Right" Text="99" Foreground="#E1E1E1" FontSize="24" FontWeight="Bold">
+                    <TextBlock.Effect>
+                        <DropShadowEffect BlurRadius="0" Direction="315" Color="Black" ShadowDepth="3"/>
+                    </TextBlock.Effect>
+                </TextBlock>
+            </Grid>
+            <Grid x:Name="gridDress8" Cursor="Hand" HorizontalAlignment="Left" Height="57" Margin="166,735,0,0" VerticalAlignment="Top" Width="742" PreviewMouseDown="item_PreviewMouseDown">
+                <Grid.Background>
+                    <ImageBrush ImageSource="Resources/LongBar.png"/>
+                </Grid.Background>
+                <Grid.RenderTransform>
+                    <TranslateTransform x:Name="transDress8" X="-1920" Y="0" />
+                </Grid.RenderTransform>
+                <Image x:Name="iconDress8" Source="Resources/GarmentGrid.png" Width="30" Height="33" HorizontalAlignment="Left" Margin="25,0,0,0"/>
+                <TextBlock x:Name="txtDress8" VerticalAlignment="Center" Margin="65,0,0,0" HorizontalAlignment="Left" Text="Garment Grid" Foreground="#E1E1E1" FontSize="24" FontWeight="Bold">
+                    <TextBlock.Effect>
+                        <DropShadowEffect BlurRadius="0" Direction="315" Color="Black" ShadowDepth="3"/>
+                    </TextBlock.Effect>
+                </TextBlock>
+                <TextBlock x:Name="txtDressQty8" VerticalAlignment="Center" Margin="0,0,20,0" HorizontalAlignment="Right" Text="99" Foreground="#E1E1E1" FontSize="24" FontWeight="Bold">
+                    <TextBlock.Effect>
+                        <DropShadowEffect BlurRadius="0" Direction="315" Color="Black" ShadowDepth="3"/>
+                    </TextBlock.Effect>
+                </TextBlock>
+            </Grid>
+            <Grid x:Name="gridDress9" Cursor="Hand" HorizontalAlignment="Left" Height="57" Margin="166,792,0,0" VerticalAlignment="Top" Width="742" PreviewMouseDown="item_PreviewMouseDown">
+                <Grid.Background>
+                    <ImageBrush ImageSource="Resources/LongBar.png"/>
+                </Grid.Background>
+                <Grid.RenderTransform>
+                    <TranslateTransform x:Name="transDress9" X="-1920" Y="0" />
+                </Grid.RenderTransform>
+                <Image x:Name="iconDress9" Source="Resources/GarmentGrid.png" Width="30" Height="33" HorizontalAlignment="Left" Margin="25,0,0,0"/>
+                <TextBlock x:Name="txtDress9" VerticalAlignment="Center" Margin="65,0,0,0" HorizontalAlignment="Left" Text="Garment Grid" Foreground="#E1E1E1" FontSize="24" FontWeight="Bold">
+                    <TextBlock.Effect>
+                        <DropShadowEffect BlurRadius="0" Direction="315" Color="Black" ShadowDepth="3"/>
+                    </TextBlock.Effect>
+                </TextBlock>
+                <TextBlock x:Name="txtDressQty9" VerticalAlignment="Center" Margin="0,0,20,0" HorizontalAlignment="Right" Text="99" Foreground="#E1E1E1" FontSize="24" FontWeight="Bold">
+                    <TextBlock.Effect>
+                        <DropShadowEffect BlurRadius="0" Direction="315" Color="Black" ShadowDepth="3"/>
+                    </TextBlock.Effect>
+                </TextBlock>
+            </Grid>
+            <Grid x:Name="gridDress10" Cursor="Hand" HorizontalAlignment="Left" Height="57" Margin="166,849,0,0" VerticalAlignment="Top" Width="742" PreviewMouseDown="item_PreviewMouseDown">
+                <Grid.Background>
+                    <ImageBrush ImageSource="Resources/LongBar.png"/>
+                </Grid.Background>
+                <Grid.RenderTransform>
+                    <TranslateTransform x:Name="transDress10" X="-1920" Y="0" />
+                </Grid.RenderTransform>
+                <Image x:Name="iconDress10" Source="Resources/GarmentGrid.png" Width="30" Height="33" HorizontalAlignment="Left" Margin="25,0,0,0"/>
+                <TextBlock x:Name="txtDress10" VerticalAlignment="Center" Margin="65,0,0,0" HorizontalAlignment="Left" Text="Garment Grid" Foreground="#E1E1E1" FontSize="24" FontWeight="Bold">
+                    <TextBlock.Effect>
+                        <DropShadowEffect BlurRadius="0" Direction="315" Color="Black" ShadowDepth="3"/>
+                    </TextBlock.Effect>
+                </TextBlock>
+                <TextBlock x:Name="txtDressQty10" VerticalAlignment="Center" Margin="0,0,20,0" HorizontalAlignment="Right" Text="99" Foreground="#E1E1E1" FontSize="24" FontWeight="Bold">
+                    <TextBlock.Effect>
+                        <DropShadowEffect BlurRadius="0" Direction="315" Color="Black" ShadowDepth="3"/>
+                    </TextBlock.Effect>
+                </TextBlock>
+            </Grid>
+            <Grid x:Name="gridDress11" Cursor="Hand" HorizontalAlignment="Left" Height="57" Margin="166,906,0,0" VerticalAlignment="Top" Width="742" PreviewMouseDown="item_PreviewMouseDown">
+                <Grid.Background>
+                    <ImageBrush ImageSource="Resources/LongBar.png"/>
+                </Grid.Background>
+                <Grid.RenderTransform>
+                    <TranslateTransform x:Name="transDress11" X="-1920" Y="0" />
+                </Grid.RenderTransform>
+                <Image x:Name="iconDress11" Source="Resources/GarmentGrid.png" Width="30" Height="33" HorizontalAlignment="Left" Margin="25,0,0,0"/>
+                <TextBlock x:Name="txtDress11" VerticalAlignment="Center" Margin="65,0,0,0" HorizontalAlignment="Left" Text="Garment Grid" Foreground="#E1E1E1" FontSize="24" FontWeight="Bold">
+                    <TextBlock.Effect>
+                        <DropShadowEffect BlurRadius="0" Direction="315" Color="Black" ShadowDepth="3"/>
+                    </TextBlock.Effect>
+                </TextBlock>
+                <TextBlock x:Name="txtDressQty11" VerticalAlignment="Center" Margin="0,0,20,0" HorizontalAlignment="Right" Text="99" Foreground="#E1E1E1" FontSize="24" FontWeight="Bold">
+                    <TextBlock.Effect>
+                        <DropShadowEffect BlurRadius="0" Direction="315" Color="Black" ShadowDepth="3"/>
+                    </TextBlock.Effect>
+                </TextBlock>
+            </Grid>
+            <Button Style="{StaticResource Ffx2Button}" x:Name="btnAllGarments" HorizontalAlignment="Left" Margin="1373,180,0,0" VerticalAlignment="Top" Width="360" Height="60" FontWeight="Bold" FontSize="28" Foreground="Black" GotFocus="Button_GotFocus" MouseEnter="Button_MouseEnter" Click="btnAllGarments_Click">
+                <Button.Effect>
+                    <DropShadowEffect BlurRadius="0" ShadowDepth="10" Direction="315" Color="Black" Opacity="0.5"/>
+                </Button.Effect>
+                <Button.RenderTransform>
+                    <TranslateTransform x:Name="btnAllGarmTrans" X="0" Y="4096" />
+                </Button.RenderTransform>
+                <TextBlock Text="Add All Garments" Foreground="#E1E1E1">
+                    <TextBlock.Effect>
+                        <DropShadowEffect BlurRadius="0" Direction="315" Color="Black" ShadowDepth="3"/>
+                    </TextBlock.Effect>
+                </TextBlock>
+            </Button>
+            <Button Style="{StaticResource Ffx2Button}" x:Name="btnAllDress" HorizontalAlignment="Left" Margin="1373,180,0,0" VerticalAlignment="Top" Width="360" Height="60" FontWeight="Bold" FontSize="28" Foreground="Black" GotFocus="Button_GotFocus" MouseEnter="Button_MouseEnter" Click="btnAllDress_Click">
+                <Button.Effect>
+                    <DropShadowEffect BlurRadius="0" ShadowDepth="10" Direction="315" Color="Black" Opacity="0.5"/>
+                </Button.Effect>
+                <Button.RenderTransform>
+                    <TranslateTransform x:Name="btnAllDressTrans" X="0" Y="4096" />
+                </Button.RenderTransform>
+                <TextBlock Text="Add All Dresspheres" Foreground="#E1E1E1">
+                    <TextBlock.Effect>
+                        <DropShadowEffect BlurRadius="0" Direction="315" Color="Black" ShadowDepth="3"/>
+                    </TextBlock.Effect>
+                </TextBlock>
+            </Button>
+        </Grid>
+        <Grid Name="AbilitiesPage" MouseWheel="MainPage_MouseWheel" KeyDown="MainPage_KeyDown">
+            <Image x:Name="partyHeader" HorizontalAlignment="Left" Height="33" Margin="166,304,0,0" VerticalAlignment="Top" Width="738" Source="Resources/PartyHeader.png">
+                <Image.RenderTransform>
+                    <TranslateTransform x:Name="transPartyHeader" X="-1920" Y="0" />
+                </Image.RenderTransform>
+            </Image>
+            <Grid x:Name="imgParty1" Tag="Yuna" Cursor="Hand" HorizontalAlignment="Left" Height="57" Margin="166,336,0,0" VerticalAlignment="Top" Width="742" PreviewMouseDown="item_PreviewMouseDown">
+                <Grid.Background>
+                    <ImageBrush ImageSource="Resources/LongBar.png"/>
+                </Grid.Background>
+                <Grid.RenderTransform>
+                    <TranslateTransform x:Name="transParty1" X="-1920" Y="0" />
+                </Grid.RenderTransform>
+                <TextBlock x:Name="txtParty1" VerticalAlignment="Center" HorizontalAlignment="Center" Text="Yuna" Foreground="#E1E1E1" FontSize="24" FontWeight="Bold">
+                    <TextBlock.Effect>
+                        <DropShadowEffect BlurRadius="0" Direction="315" Color="Black" ShadowDepth="3"/>
+                    </TextBlock.Effect>
+                </TextBlock>
+                <TextBlock x:Name="txtPartySize1" VerticalAlignment="Center" Margin="0,0,20,0" HorizontalAlignment="Right" Text="S" Foreground="Gold" FontSize="24">
+                    <TextBlock.Effect>
+                        <DropShadowEffect BlurRadius="0" Direction="315" Color="Black" ShadowDepth="3"/>
+                    </TextBlock.Effect>
+                </TextBlock>
+            </Grid>
+            <Grid x:Name="imgParty2" Tag="Rikku" Cursor="Hand" HorizontalAlignment="Left" Height="57" Margin="166,393,0,0" VerticalAlignment="Top" Width="742" PreviewMouseDown="item_PreviewMouseDown">
+                <Grid.Background>
+                    <ImageBrush ImageSource="Resources/LongBar.png"/>
+                </Grid.Background>
+                <Grid.RenderTransform>
+                    <TranslateTransform x:Name="transParty2" X="-1920" Y="0" />
+                </Grid.RenderTransform>
+                <TextBlock x:Name="txtParty2" VerticalAlignment="Center" HorizontalAlignment="Center" Text="Rikku" Foreground="#E1E1E1" FontSize="24" FontWeight="Bold">
+                    <TextBlock.Effect>
+                        <DropShadowEffect BlurRadius="0" Direction="315" Color="Black" ShadowDepth="3"/>
+                    </TextBlock.Effect>
+                </TextBlock>
+                <TextBlock x:Name="txtPartySize2" VerticalAlignment="Center" Margin="0,0,20,0" HorizontalAlignment="Right" Text="S" Foreground="Gold" FontSize="24">
+                    <TextBlock.Effect>
+                        <DropShadowEffect BlurRadius="0" Direction="315" Color="Black" ShadowDepth="3"/>
+                    </TextBlock.Effect>
+                </TextBlock>
+            </Grid>
+            <Grid x:Name="imgParty3" Tag="Paine" Cursor="Hand" HorizontalAlignment="Left" Height="57" Margin="166,450,0,0" VerticalAlignment="Top" Width="742" PreviewMouseDown="item_PreviewMouseDown">
+                <Grid.Background>
+                    <ImageBrush ImageSource="Resources/LongBar.png"/>
+                </Grid.Background>
+                <Grid.RenderTransform>
+                    <TranslateTransform x:Name="transParty3" X="-1920" Y="0" />
+                </Grid.RenderTransform>
+                <TextBlock x:Name="txtParty3" VerticalAlignment="Center" HorizontalAlignment="Center" Text="Paine" Foreground="#E1E1E1" FontSize="24" FontWeight="Bold">
+                    <TextBlock.Effect>
+                        <DropShadowEffect BlurRadius="0" Direction="315" Color="Black" ShadowDepth="3"/>
+                    </TextBlock.Effect>
+                </TextBlock>
+                <TextBlock x:Name="txtPartySize3" VerticalAlignment="Center" Margin="0,0,20,0" HorizontalAlignment="Right" Text="S" Foreground="Gold" FontSize="24">
+                    <TextBlock.Effect>
+                        <DropShadowEffect BlurRadius="0" Direction="315" Color="Black" ShadowDepth="3"/>
+                    </TextBlock.Effect>
+                </TextBlock>
+            </Grid>
+        </Grid>
+        <Grid Name="UnderConstruction" Width="742" Height="57">
+            <Grid.Background>
+                <ImageBrush ImageSource="/FFX2SaveEditor;component/Resources/LongBar.png"/>
+            </Grid.Background>
+            <Grid.Effect>
+                <DropShadowEffect Direction="315" Color="Black" ShadowDepth="3" BlurRadius="0"/>
+            </Grid.Effect>
+            <TextBlock Text="Under Construction" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="#E1E1E1" FontSize="24" FontWeight="Bold">
+                <TextBlock.Effect>
+                    <DropShadowEffect Direction="315" Color="Black" ShadowDepth="5" BlurRadius="0"/>
+                </TextBlock.Effect>
+            </TextBlock>
+            <Grid.RenderTransform>
+                <TranslateTransform x:Name="transUnderConstruction" X="0" Y="4096" />
+            </Grid.RenderTransform>
+        </Grid>
+        <Grid Name="StoryPage">
+            <TreeView x:Name="trvStory" BorderThickness="0" Cursor="Hand" Background="Transparent" HorizontalContentAlignment="Stretch" Height="616" Margin="698,254,182,0" VerticalAlignment="Top" TreeViewItem.Selected="trvStory_Selected" MouseDoubleClick="trvStory_MouseDoubleClick">
+                <TreeView.Resources>
+                    <Style TargetType="{x:Type TreeViewItem}">
+                        <Setter Property="HeaderTemplate">
+                            <Setter.Value>
+                                <DataTemplate>
+                                    <Grid>
+                                        <Image HorizontalAlignment="Left"
+                                               Source="{Binding Tag, Converter={x:Static local:HeaderToImageConverter.Instance}, RelativeSource={RelativeSource AncestorType={x:Type TreeViewItem}, Mode=FindAncestor}}"/>
+                                        <TextBlock VerticalAlignment="Center" Padding="10" FontWeight="Bold" Foreground="#e1e1e1" Text="{Binding}" HorizontalAlignment="{Binding Tag, Converter={x:Static local:HeaderHAlignConverter.Instance}, RelativeSource={RelativeSource AncestorType={x:Type TreeViewItem}, Mode=FindAncestor}}">
+                                            <TextBlock.Effect>
+                                                <DropShadowEffect BlurRadius="0" Direction="315" Color="Black" ShadowDepth="3"/>
+                                            </TextBlock.Effect>
+                                        </TextBlock>
+                                    </Grid>
+                                </DataTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </TreeView.Resources>
+                <TreeView.RenderTransform>
+                    <TranslateTransform x:Name="transStoryTree" X="0" Y="4800" />
+                </TreeView.RenderTransform>
+            </TreeView>
+            <Button Style="{StaticResource Ffx2Button}" x:Name="btnAllStory" HorizontalAlignment="Left" Margin="1373,180,0,0" VerticalAlignment="Top" Width="360" Height="60" FontWeight="Bold" FontSize="28" Foreground="Black" GotFocus="Button_GotFocus" MouseEnter="Button_MouseEnter" Click="btnAllStory_Click">
+                <Button.Effect>
+                    <DropShadowEffect BlurRadius="0" ShadowDepth="10" Direction="315" Color="Black" Opacity="0.5"/>
+                </Button.Effect>
+                <Button.RenderTransform>
+                    <TranslateTransform x:Name="btnAllStoryTrans" X="0" Y="4096" />
+                </Button.RenderTransform>
+                <TextBlock Text="Complete All" Foreground="#E1E1E1">
+                    <TextBlock.Effect>
+                        <DropShadowEffect BlurRadius="0" Direction="315" Color="Black" ShadowDepth="3"/>
+                    </TextBlock.Effect>
+                </TextBlock>
+            </Button>
+            <Button Style="{StaticResource Ffx2Button}" x:Name="btnAllAbilities" HorizontalAlignment="Left" Margin="1373,180,0,0" VerticalAlignment="Top" Width="360" Height="60" FontWeight="Bold" FontSize="28" Foreground="Black" GotFocus="Button_GotFocus" MouseEnter="Button_MouseEnter" Click="btnAllAbilities_Click">
+                <Button.Effect>
+                    <DropShadowEffect BlurRadius="0" ShadowDepth="10" Direction="315" Color="Black" Opacity="0.5"/>
+                </Button.Effect>
+                <Button.RenderTransform>
+                    <TranslateTransform x:Name="btnAllAbilitiesTrans" X="0" Y="4096" />
+                </Button.RenderTransform>
+                <TextBlock Text="Complete All" Foreground="#E1E1E1">
+                    <TextBlock.Effect>
+                        <DropShadowEffect BlurRadius="0" Direction="315" Color="Black" ShadowDepth="3"/>
+                    </TextBlock.Effect>
+                </TextBlock>
+            </Button>
+            <Border Background="#301010ff" BorderBrush="Black" BorderThickness="3" Margin="1068,185,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Width="300" Height="50">
+                <Border.RenderTransform>
+                    <TranslateTransform x:Name="transStoryComplete" X="0" Y="4096" />
+                </Border.RenderTransform>
+                <TextBlock x:Name="lblStoryComplete" Text="Completion: 100%" FontSize="28" Foreground="#e1e1e1" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <TextBlock.Effect>
+                        <DropShadowEffect BlurRadius="0" Direction="315" Color="Black" ShadowDepth="5"/>
+                    </TextBlock.Effect>
+                </TextBlock>
+            </Border>
+        </Grid>
+    </Grid>
+</Window>

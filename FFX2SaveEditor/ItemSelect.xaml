@@ -1,0 +1,58 @@
+﻿<Window x:Class="FFX2SaveEditor.ItemSelect"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:FFX2SaveEditor"
+        mc:Ignorable="d"
+        Title="Select Item" Height="154.787" Width="259.15"
+        ResizeMode="NoResize"
+        Icon="Resources/tonberry.gif"
+        Loaded="Window_Loaded">
+    <Window.Background>
+        <ImageBrush ImageSource="/FFX2SaveEditor;component/Resources/Background.png" Stretch="None"/>
+    </Window.Background>
+    <Grid Margin="0,0,5,2.5">
+        <ComboBox x:Name="cbxItem" HorizontalAlignment="Left" Margin="10,36,0,0" VerticalAlignment="Top" Width="173" FontSize="16" FontWeight="Bold">
+            <ComboBox.Effect>
+                <DropShadowEffect BlurRadius="0" Direction="315" Color="Black" ShadowDepth="10" Opacity="0.5"/>
+            </ComboBox.Effect>
+        </ComboBox>
+        <Label Content="Item" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Top" Foreground="#E1E1E1" FontSize="24" FontWeight="Bold">
+            <Label.Effect>
+                <DropShadowEffect BlurRadius="0" Direction="315" Color="Black" ShadowDepth="3"/>
+            </Label.Effect>
+        </Label>
+        <Label Content="Qty" HorizontalAlignment="Left" Margin="188,0,0,0" VerticalAlignment="Top" Foreground="#E1E1E1" FontSize="24" FontWeight="Bold">
+            <Label.Effect>
+                <DropShadowEffect BlurRadius="0" Direction="315" Color="Black" ShadowDepth="3"/>
+            </Label.Effect>
+        </Label>
+        <TextBox x:Name="tbxQuantity" Text="1" HorizontalAlignment="Left" Height="28" Margin="192,36,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="46" FontSize="16" FontWeight="Bold" PreviewTextInput="PreviewTextInputHandler" MouseWheel="tbxQuantity_MouseWheel">
+            <TextBox.Effect>
+                <DropShadowEffect BlurRadius="0" Direction="315" Color="Black" ShadowDepth="10" Opacity="0.5"/>
+            </TextBox.Effect>
+        </TextBox>
+        <Button x:Name="btnCancel" Style="{StaticResource Ffx2Button}" HorizontalAlignment="Left" Margin="10,75,0,0" VerticalAlignment="Top" Width="90" Click="btnCancel_Click" Height="31" FontSize="18" FontWeight="Bold">
+            <Button.Effect>
+                <DropShadowEffect BlurRadius="0" ShadowDepth="10" Direction="315" Color="Black" Opacity="0.5"/>
+            </Button.Effect>
+            <TextBlock Text="Cancel" Foreground="#E1E1E1">
+                <TextBlock.Effect>
+                    <DropShadowEffect BlurRadius="0" Direction="315" Color="Black" ShadowDepth="3"/>
+                </TextBlock.Effect>
+            </TextBlock>
+        </Button>
+        <Button x:Name="btnOK" Style="{StaticResource Ffx2Button}" HorizontalAlignment="Left" Margin="148,75,0,0" VerticalAlignment="Top" Width="90" Click="btnOK_Click" Height="31" FontSize="18" FontWeight="Bold">
+            <Button.Effect>
+                <DropShadowEffect BlurRadius="0" ShadowDepth="10" Direction="315" Color="Black" Opacity="0.5"/>
+            </Button.Effect>
+            <TextBlock Text="OK" Foreground="#E1E1E1">
+                <TextBlock.Effect>
+                    <DropShadowEffect BlurRadius="0" Direction="315" Color="Black" ShadowDepth="3"/>
+                </TextBlock.Effect>
+            </TextBlock>
+        </Button>
+
+    </Grid>
+</Window>

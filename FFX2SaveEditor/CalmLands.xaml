@@ -1,0 +1,109 @@
+﻿<Window x:Class="FFX2SaveEditor.CalmLands"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:FFX2SaveEditor"
+        mc:Ignorable="d"
+        Title="CalmLands" Height="341.95" Width="404.873"
+        ResizeMode="NoResize"
+        Icon="Resources/tonberry.gif"
+        Loaded="Window_Loaded">
+    <Grid Margin="0,0,5,2.5">
+        <TextBox x:Name="tbxOpenAirCredits" Text="999999999" HorizontalAlignment="Left" Margin="111,57,0,0" VerticalAlignment="Top" Width="105" FontSize="16" FontWeight="Bold" MaxLength="11" MouseWheel="textbox_MouseWheel">
+            <TextBox.Effect>
+                <DropShadowEffect BlurRadius="0" Direction="315" Color="Black" ShadowDepth="10" Opacity="0.5"/>
+            </TextBox.Effect>
+        </TextBox>
+        <Label Content="Open Air" HorizontalAlignment="Left" Margin="111,0,0,0" VerticalAlignment="Top" Foreground="#E1E1E1" FontSize="24" FontWeight="Bold">
+            <Label.Effect>
+                <DropShadowEffect BlurRadius="0" Direction="315" Color="Black" ShadowDepth="3"/>
+            </Label.Effect>
+        </Label>
+        <Label Content="Argent" HorizontalAlignment="Left" Margin="266,0,0,0" VerticalAlignment="Top" Foreground="#E1E1E1" FontSize="24" FontWeight="Bold">
+            <Label.Effect>
+                <DropShadowEffect BlurRadius="0" Direction="315" Color="Black" ShadowDepth="3"/>
+            </Label.Effect>
+        </Label>
+        <TextBox x:Name="tbxArgentCredits" HorizontalAlignment="Left" Height="28" Margin="266,57,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="105" FontSize="16" FontWeight="Bold" MaxLength="11" PreviewTextInput="PreviewTextInputHandler" MouseWheel="textbox_MouseWheel">
+            <TextBox.Effect>
+                <DropShadowEffect BlurRadius="0" Direction="315" Color="Black" ShadowDepth="10" Opacity="0.5"/>
+            </TextBox.Effect>
+        </TextBox>
+        <Button x:Name="btnCancel" Style="{StaticResource Ffx2Button}" Margin="0,0,105,9.5" Click="btnCancel_Click" FontSize="18" FontWeight="Bold" HorizontalAlignment="Right" Width="90" Height="32" VerticalAlignment="Bottom">
+            <Button.Effect>
+                <DropShadowEffect BlurRadius="0" ShadowDepth="10" Direction="315" Color="Black" Opacity="0.5"/>
+            </Button.Effect>
+            <TextBlock Text="Cancel" Foreground="#E1E1E1">
+                <TextBlock.Effect>
+                    <DropShadowEffect BlurRadius="0" Direction="315" Color="Black" ShadowDepth="3"/>
+                </TextBlock.Effect>
+            </TextBlock>
+        </Button>
+        <Button x:Name="btnOK" Style="{StaticResource Ffx2Button}" Margin="0,0,10,9.5" Click="btnOK_Click" FontSize="18" FontWeight="Bold" HorizontalAlignment="Right" Width="90" Height="32" VerticalAlignment="Bottom">
+            <Button.Effect>
+                <DropShadowEffect BlurRadius="0" ShadowDepth="10" Direction="315" Color="Black" Opacity="0.5"/>
+            </Button.Effect>
+            <TextBlock Text="OK" Foreground="#E1E1E1" RenderTransformOrigin="0.4,2.454">
+                <TextBlock.Effect>
+                    <DropShadowEffect BlurRadius="0" Direction="315" Color="Black" ShadowDepth="3"/>
+                </TextBlock.Effect>
+            </TextBlock>
+        </Button>
+        <Label Content="Credits:" HorizontalAlignment="Left" Margin="10,48,0,0" VerticalAlignment="Top" Foreground="#E1E1E1" FontSize="24" FontWeight="Bold">
+            <Label.Effect>
+                <DropShadowEffect BlurRadius="0" Direction="315" Color="Black" ShadowDepth="3"/>
+            </Label.Effect>
+        </Label>
+        <TextBox x:Name="tbxOpenAirPoints" Text="999999999" HorizontalAlignment="Left" Margin="111,104,0,0" VerticalAlignment="Top" Width="105" FontSize="16" FontWeight="Bold" MaxLength="11" MouseWheel="textbox_MouseWheel">
+            <TextBox.Effect>
+                <DropShadowEffect BlurRadius="0" Direction="315" Color="Black" ShadowDepth="10" Opacity="0.5"/>
+            </TextBox.Effect>
+        </TextBox>
+        <TextBox x:Name="tbxArgentPoints" HorizontalAlignment="Left" Height="28" Margin="266,104,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="105" FontSize="16" FontWeight="Bold" MaxLength="11" PreviewTextInput="PreviewTextInputHandler" MouseWheel="textbox_MouseWheel">
+            <TextBox.Effect>
+                <DropShadowEffect BlurRadius="0" Direction="315" Color="Black" ShadowDepth="10" Opacity="0.5"/>
+            </TextBox.Effect>
+        </TextBox>
+        <Label Content="Points:" HorizontalAlignment="Left" Margin="19,95,0,0" VerticalAlignment="Top" Foreground="#E1E1E1" FontSize="24" FontWeight="Bold">
+            <Label.Effect>
+                <DropShadowEffect BlurRadius="0" Direction="315" Color="Black" ShadowDepth="3"/>
+            </Label.Effect>
+        </Label>
+        <TextBox x:Name="tbxMarraigePoints" Text="999999999" HorizontalAlignment="Left" Margin="221,185,0,0" VerticalAlignment="Top" Width="105" FontSize="16" FontWeight="Bold" MaxLength="11" MouseWheel="textbox_MouseWheel">
+            <TextBox.Effect>
+                <DropShadowEffect BlurRadius="0" Direction="315" Color="Black" ShadowDepth="10" Opacity="0.5"/>
+            </TextBox.Effect>
+        </TextBox>
+        <Label Content="Marraige Points:" HorizontalAlignment="Left" Margin="20,174,0,0" VerticalAlignment="Top" Foreground="#E1E1E1" FontSize="24" FontWeight="Bold">
+            <Label.Effect>
+                <DropShadowEffect BlurRadius="0" Direction="315" Color="Black" ShadowDepth="3"/>
+            </Label.Effect>
+        </Label>
+        <TextBox x:Name="tbxHoverRides" Text="999999999" HorizontalAlignment="Left" Margin="221,217,0,0" VerticalAlignment="Top" Width="105" FontSize="16" FontWeight="Bold" MaxLength="11" MouseWheel="textbox_MouseWheel">
+            <TextBox.Effect>
+                <DropShadowEffect BlurRadius="0" Direction="315" Color="Black" ShadowDepth="10" Opacity="0.5"/>
+            </TextBox.Effect>
+        </TextBox>
+        <Label Content="Hover Rides:" HorizontalAlignment="Left" Margin="63,206,0,0" VerticalAlignment="Top" Foreground="#E1E1E1" FontSize="24" FontWeight="Bold">
+            <Label.Effect>
+                <DropShadowEffect BlurRadius="0" Direction="315" Color="Black" ShadowDepth="3"/>
+            </Label.Effect>
+        </Label>
+        <TextBox x:Name="tbxCreditsCh5" Text="999999999" HorizontalAlignment="Left" Margin="111,147,0,0" VerticalAlignment="Top" Width="105" FontSize="16" FontWeight="Bold" MaxLength="11" MouseWheel="textbox_MouseWheel">
+            <TextBox.Effect>
+                <DropShadowEffect BlurRadius="0" Direction="315" Color="Black" ShadowDepth="10" Opacity="0.5"/>
+            </TextBox.Effect>
+        </TextBox>
+        <TextBox x:Name="tbxCredits2Ch5" Text="999999999" HorizontalAlignment="Left" Margin="266,147,0,0" VerticalAlignment="Top" Width="105" FontSize="16" FontWeight="Bold" MaxLength="11" MouseWheel="textbox_MouseWheel">
+            <TextBox.Effect>
+                <DropShadowEffect BlurRadius="0" Direction="315" Color="Black" ShadowDepth="10" Opacity="0.5"/>
+            </TextBox.Effect>
+        </TextBox>
+        <Label Content="Ch 5:" HorizontalAlignment="Left" Margin="40,137,0,0" VerticalAlignment="Top" Foreground="#E1E1E1" FontSize="24" FontWeight="Bold">
+            <Label.Effect>
+                <DropShadowEffect BlurRadius="0" Direction="315" Color="Black" ShadowDepth="3"/>
+            </Label.Effect>
+        </Label>
+    </Grid>
+</Window>
