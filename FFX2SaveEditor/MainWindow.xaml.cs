@@ -2126,6 +2126,17 @@ namespace FFX2SaveEditor
         private void SaveFile()
         {
             SaveFileDialog sfd = new SaveFileDialog();
+            if (save is Ps3Save)
+            {
+                sfd.FileName = "SAVES-edited";
+                sfd.Filter = "PS3 SAVES Data|*.*";
+            }
+            else if (save is PcSave)
+            {
+                sfd.FileName = "ffx_edited";
+                sfd.Filter = "PC Save Data|*.*";
+            }
+
             if (!(bool)sfd.ShowDialog())
                 return;
 

@@ -38,7 +38,7 @@
     <Reference Include="PresentationFramework.Aero" />
     <Reference Include="PS3FileSystem">
       <HintPath>D:\OneDrive\Documents\PS3FileSystem\PS3FileSystem\bin\Debug\PS3FileSystem.dll</HintPath>
-      <Private>False</Private>
+      <Private>True</Private>
       <EmbedInteropTypes>False</EmbedInteropTypes>
     </Reference>
     <Reference Include="System" />

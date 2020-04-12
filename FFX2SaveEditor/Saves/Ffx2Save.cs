@@ -2,8 +2,6 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace FFX2SaveEditor
 {
@@ -180,27 +178,33 @@ namespace FFX2SaveEditor
             StoryFlagBytes = br.ReadBytes(StoryFlagBytes.Length);
 
             // Requirements
-            foreach (var f in GameInfo.Requisites)
+            foreach (StoryFlag f in GameInfo.Requisites)
             {
-                var b = work[f.Address];
+                byte b = work[f.Address];
                 if ((b & f.Value) != f.Value)
+                {
                     Requisites.Add(f);
+                }
             }
 
             // Completion flags
             for (int i = 0; i < 0x4000; i++)
             {
-                var b = StoryFlagBytes[i];
+                byte b = StoryFlagBytes[i];
                 for (int n = 0; n < 8; n++)
                 {
                     if ((b & 1) == 1)
                     {
                         StoryFlagCount++;
-                        var flag = GameInfo.Flags.FirstOrDefault(f => f.Address == i && f.Value == Math.Pow(2, n));
+                        StoryFlag flag = GameInfo.Flags.FirstOrDefault(f => f.Address == i && f.Value == Math.Pow(2, n));
                         if (flag != null)
+                        {
                             MissingFlags.Add(flag);
+                        }
                         else
+                        {
                             MissingFlags.Add(new StoryFlag((ushort)i, (byte)Math.Pow(2, n), i.ToString("X2"), 0, "???"));
+                        }
                     }
                     b >>= 1;
                 }
@@ -211,11 +215,11 @@ namespace FFX2SaveEditor
 
             br.BaseStream.Seek(garmOffset, SeekOrigin.Begin);
             work = br.ReadBytes(8);
-            for(byte b = 0; b < 8; b++)
+            for (byte b = 0; b < 8; b++)
             {
                 for (byte bit = 0; bit < 8; bit++)
                 {
-                    GarmentGrids[b*8 + bit] = (work[b] & (byte)Math.Pow(2, bit)) > 0;
+                    GarmentGrids[b * 8 + bit] = (work[b] & (byte)Math.Pow(2, bit)) > 0;
                 }
             }
 
@@ -245,7 +249,9 @@ namespace FFX2SaveEditor
             for (int i = 0; i < table.Length / 2; i++)
             {
                 if (table[i * 2 + 1] == 0x90)
+                {
                     Accessories[i, 0] = table[i * 2] > 0x7f ? (byte)0 : table[i * 2];
+                }
             }
             table = br.ReadBytes(0x80);
             for (int i = 0; i < table.Length; i++)
@@ -315,9 +321,9 @@ namespace FFX2SaveEditor
                 br.ReadBytes(0x5d);
             }
 
-            for (var c = 0; c < 3; c++)
+            for (int c = 0; c < 3; c++)
             {
-                foreach (var ability in Characters[c].Abilities)
+                foreach (Ability ability in Characters[c].Abilities)
                 {
                     br.BaseStream.Seek(abilityOffsets[c] + ability.Offset, SeekOrigin.Begin);
                     ability.Ap = br.ReadUInt16();
@@ -339,7 +345,7 @@ namespace FFX2SaveEditor
                 bw.Write(Items[i, 0]);
                 bw.Write(Items[i, 0] == 0xff ? (byte)0 : (byte)0x20);
             }
-            
+
             for (int i = 0; i < 256; i++)
             {
                 bw.Write(Items[i, 1]);
@@ -354,9 +360,9 @@ namespace FFX2SaveEditor
 
         public virtual void WriteItem(byte index)
         {
-            bw.BaseStream.Seek(itemOffset + index*2, SeekOrigin.Begin);
+            bw.BaseStream.Seek(itemOffset + index * 2, SeekOrigin.Begin);
             bw.Write(Items[index, 0]);
-            bw.Write(Items[index,0] == 0xff ? (byte)0 : (byte)0x20);
+            bw.Write(Items[index, 0] == 0xff ? (byte)0 : (byte)0x20);
 
             bw.BaseStream.Seek(itemOffset + 0x200 + index, SeekOrigin.Begin);
             bw.Write(Items[index, 1]);
@@ -390,13 +396,15 @@ namespace FFX2SaveEditor
         public virtual void WriteGarmentGrids()
         {
             bw.BaseStream.Seek(garmOffset, SeekOrigin.Begin);
-            var bytes = new byte[8];
+            byte[] bytes = new byte[8];
             for (byte b = 0; b < 8; b++)
             {
                 for (byte bit = 0; bit < 8; bit++)
                 {
-                    if (GarmentGrids[b*8 + bit])
+                    if (GarmentGrids[b * 8 + bit])
+                    {
                         bytes[b] |= (byte)Math.Pow(2, bit);
+                    }
                 }
             }
             bw.Write(bytes);
@@ -438,7 +446,7 @@ namespace FFX2SaveEditor
             CalculateChecksum();
             CalculateGameComplete();
 
-            using (var fw = new BinaryWriter(File.Open(filename, FileMode.Create)))
+            using (BinaryWriter fw = new BinaryWriter(File.Open(filename, FileMode.Create)))
             {
                 fw.Write(ms.ToArray());
             }
@@ -458,9 +466,9 @@ namespace FFX2SaveEditor
 
         private void CalculateGameComplete()
         {
-            var complete = StoryFlagBytes.Sum(b => Convert.ToString(b, 2).ToCharArray().Count(c => c == '1'));
+            int complete = StoryFlagBytes.Sum(b => Convert.ToString(b, 2).ToCharArray().Count(c => c == '1'));
             bw.BaseStream.Seek(0x0C, SeekOrigin.Begin);
-            bw.Write((byte)((1-complete/525.0)*100));
+            bw.Write((byte)((1 - complete / 525.0) * 100));
         }
     }
 
@@ -486,11 +494,15 @@ namespace FFX2SaveEditor
 
         public Character(PartyMember member)
         {
-            foreach(var ability in Globals.Abilities.Where(a => a.Character == (byte)PartyMember.All))
+            foreach (Ability ability in Globals.Abilities.Where(a => a.Character == (byte)PartyMember.All))
+            {
                 Abilities.Add(ability);
+            }
 
-            foreach (var ability in Globals.Abilities.Where(a => a.Character == (byte)member))
+            foreach (Ability ability in Globals.Abilities.Where(a => a.Character == (byte)member))
+            {
                 Abilities.Add(ability);
+            }
         }
     }
 
@@ -511,7 +523,7 @@ namespace FFX2SaveEditor
         public string Name { get; set; }
         public ushort Ap { get; set; }
 
-        public bool Mastered { get { return Ap >= MaxAp; } }
+        public bool Mastered => Ap >= MaxAp;
 
         public Ability(byte character, byte dressphere, byte type, ushort ap, short offset, string name)
         {

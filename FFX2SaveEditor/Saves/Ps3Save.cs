@@ -38,6 +38,21 @@ namespace FFX2SaveEditor.Saves
                 }
             }
 
+            if(string.IsNullOrEmpty(pfdFile))
+            {
+                MessageBox.Show("No .PFD file in selected files. Please select all three files (.PFD, .SFO, SAVES)");
+                return;
+            }
+            if(string.IsNullOrEmpty(sfoFile))
+            {
+                MessageBox.Show("No .SFO file in selected files. Please select all three files (.PFD, .SFO, SAVES)");
+                return;
+            }
+            if(string.IsNullOrEmpty(datFile))// || !datFile.EndsWith("SAVES"))
+            {
+                MessageBox.Show("No SAVES file in selected files. Please select all three files (.PFD, .SFO, SAVES)");
+                return;
+            }
             OpenPS3Save(File.Open(pfdFile, FileMode.Open), File.Open(sfoFile, FileMode.Open), File.Open(datFile, FileMode.Open));
         }
 
@@ -61,12 +76,20 @@ namespace FFX2SaveEditor.Saves
         public override void SaveFile(string filename)
         {
             // First write raw file and mod checksum
-            base.SaveFile(filename);
+            try
+            {
+                base.SaveFile(filename);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Unable to write to disk.\r\n" + ex.Message);
+                return;
+            }
 
             // Then encrypt with PS3 standard
             byte[] filedata = null;
             Ps3File file = manager.Files.FirstOrDefault(t => t.PFDEntry.FileName == dataName);
-            if (file != null) { MessageBox.Show("Could not locate data file named " + dataName);return; }
+            if (file == null) { MessageBox.Show("Could not locate data file named " + dataName);return; }
 
             filedata = file.EncryptToBytes();
             if (filedata != null)

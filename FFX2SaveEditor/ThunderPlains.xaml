@@ -20,7 +20,7 @@
                 </TextBlock.Effect>
             </TextBlock>
         </Button>
-        <Button x:Name="btnOK" Style="{StaticResource Ffx2Button}" Margin="0,0,10,9.5" Click="btnOK_Click" FontSize="18" FontWeight="Bold" HorizontalAlignment="Right" Width="90" Height="32" VerticalAlignment="Bottom">
+        <Button x:Name="btnOK" Style="{StaticResource Ffx2Button}" Margin="294,0,10,9" Click="btnOK_Click" FontSize="18" FontWeight="Bold" Height="32" VerticalAlignment="Bottom">
             <Button.Effect>
                 <DropShadowEffect BlurRadius="0" ShadowDepth="10" Direction="315" Color="Black" Opacity="0.5"/>
             </Button.Effect>
