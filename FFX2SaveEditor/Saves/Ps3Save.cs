@@ -53,7 +53,7 @@ namespace FFX2SaveEditor.Saves
                 MessageBox.Show("No SAVES file in selected files. Please select all three files (.PFD, .SFO, SAVES)");
                 return;
             }
-            OpenPS3Save(File.Open(pfdFile, FileMode.Open), File.Open(sfoFile, FileMode.Open), File.Open(datFile, FileMode.Open));
+            OpenPS3Save(File.Open(pfdFile, FileMode.Open), File.Open(sfoFile, FileMode.Open), new MemoryStream(File.ReadAllBytes(datFile)));
         }
 
         private void OpenPS3Save(Stream pfd, Stream sfo, Stream bin)

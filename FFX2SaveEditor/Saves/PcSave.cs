@@ -12,8 +12,11 @@ namespace FFX2SaveEditor.Saves
     /// </summary>
     public class PcSave : Ffx2Save
     {
+        public string OriginalName;
+
         public PcSave(string filename) : base(0x16268, 0x7980, 0x7cc0, 0x7844, 0x784d, 0x222c)
         {
+            OriginalName = Path.GetFileName(filename);
             ReadFile(new MemoryStream(File.ReadAllBytes(filename)));
         }
     }

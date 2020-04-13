@@ -915,7 +915,24 @@ namespace FFX2SaveEditor
         }
 
         private void UpdateAccessoryScreen()
-        { 
+        {
+            txtItemQty1.Background = null;
+            txtItemQty2.Background = null;
+            txtItemQty3.Background = null;
+            txtItemQty4.Background = null;
+            txtItemQty5.Background = null;
+            txtItemQty6.Background = null;
+            txtItemQty7.Background = null;
+            txtItemQty8.Background = null;
+            txtItemQty9.Background = null;
+            txtItemQty10.Background = null;
+            txtItemQty11.Background = null;
+            txtItemQty12.Background = null;
+            txtItemQty13.Background = null;
+            txtItemQty14.Background = null;
+            txtItemQty15.Background = null;
+            txtItemQty16.Background = null;
+            
             txtItem1.Text = Globals.Accessories[save.Accessories[0+scroll, 0]];
             txtItemQty1.Text = save.Accessories[0+scroll, 1].ToString();
             txtItem2.Text = Globals.Accessories[save.Accessories[1+scroll, 0]];
@@ -1011,6 +1028,7 @@ namespace FFX2SaveEditor
         private void UpdateAbilitiesScreen()
         {
             var abilities = save.Characters[(byte)currentChar].Abilities.Where(a => a.Dressphere == (byte)currentDress).ToList();
+            if (abilities.Count == 0) return;
 
             txtItem1.Text = abilities[0].Name;
             txtItemQty1.Text = abilities[0].Mastered ? "" : abilities[0].Ap + "/" + abilities[0].MaxAp;
@@ -1225,6 +1243,18 @@ namespace FFX2SaveEditor
 
         private void UpdateAbilityDressScreen()
         {
+            txtDress1.Foreground = Globals.WhiteBrush;
+            txtDress2.Foreground = Globals.WhiteBrush;
+            txtDress3.Foreground = Globals.WhiteBrush;
+            txtDress4.Foreground = Globals.WhiteBrush;
+            txtDress5.Foreground = Globals.WhiteBrush;
+            txtDress6.Foreground = Globals.WhiteBrush;
+            txtDress7.Foreground = Globals.WhiteBrush;
+            txtDress8.Foreground = Globals.WhiteBrush;
+            txtDress9.Foreground = Globals.WhiteBrush;
+            txtDress10.Foreground = Globals.WhiteBrush;
+            txtDress11.Foreground = Globals.WhiteBrush;
+
             txtDress1.Text = Globals.Dresspheres[0 + scroll];
             txtDress2.Text = Globals.Dresspheres[1 + scroll];
             txtDress3.Text = Globals.Dresspheres[2 + scroll];
@@ -1236,6 +1266,7 @@ namespace FFX2SaveEditor
             txtDress9.Text = Globals.Dresspheres[8 + scroll];
             txtDress10.Text = Globals.Dresspheres[9 + scroll];
             txtDress11.Text = Globals.Dresspheres[10 + scroll];
+
             gridDress1.Tag = txtDress1.Text;
             gridDress2.Tag = txtDress2.Text;
             gridDress3.Tag = txtDress3.Text;
@@ -1247,6 +1278,7 @@ namespace FFX2SaveEditor
             gridDress9.Tag = txtDress9.Text;
             gridDress10.Tag = txtDress10.Text;
             gridDress11.Tag = txtDress11.Text;
+
             iconDress1.Source = new BitmapImage(Globals.DressIcons[0 + scroll]);
             iconDress2.Source = new BitmapImage(Globals.DressIcons[1 + scroll]);
             iconDress3.Source = new BitmapImage(Globals.DressIcons[2 + scroll]);
@@ -1270,9 +1302,9 @@ namespace FFX2SaveEditor
             txtDressQty6.Text = abilities[5]*100/16 + "%";
             txtDressQty7.Text = abilities[6]*100/16 + "%";
             txtDressQty8.Text = abilities[7]*100/16 + "%";
-            txtDressQty9.Text = abilities[8] * 100 / 16 + "%";
+            txtDressQty9.Text = abilities[8]*100/16 + "%";
             txtDressQty10.Text = abilities[9]*100/16 + "%";
-            txtDressQty11.Text = abilities[10] * 100 / 16 + "%";
+            txtDressQty11.Text = abilities[10]*100/16 + "%";
         }
 
         private void UpdateMiniGameSelectScreen()
@@ -1725,7 +1757,7 @@ namespace FFX2SaveEditor
             var dialog = new ItemSelect(MenuType.Dressphere);
             var item = ((TextBlock)(sender).Children[1]);
             var qty = ((TextBlock)(sender).Children[2]);
-            var index = int.Parse((sender).Name.Substring(8));
+            var index = int.Parse((sender).Name.Substring(9));
             index+=scroll-1;
 
             // If we don't have it, let's just add 1 instead of opening the form
@@ -2128,12 +2160,12 @@ namespace FFX2SaveEditor
             SaveFileDialog sfd = new SaveFileDialog();
             if (save is Ps3Save)
             {
-                sfd.FileName = "SAVES-edited";
+                sfd.FileName = "SAVES";
                 sfd.Filter = "PS3 SAVES Data|*.*";
             }
             else if (save is PcSave)
             {
-                sfd.FileName = "ffx_edited";
+                sfd.FileName = ((PcSave)save).OriginalName;
                 sfd.Filter = "PC Save Data|*.*";
             }
 
