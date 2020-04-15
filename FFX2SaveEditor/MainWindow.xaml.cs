@@ -1957,7 +1957,7 @@ namespace FFX2SaveEditor
             if (save is Ps3Save)
             {
                 SaveFileDialog sfd = new SaveFileDialog();
-                sfd.FileName = "ffx_1000";
+                sfd.FileName = "ffx2_100";
                 sfd.Filter = "PC Save Data|*.*";
 
                 if (!(bool)sfd.ShowDialog())
