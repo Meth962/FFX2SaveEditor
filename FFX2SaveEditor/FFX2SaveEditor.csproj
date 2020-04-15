@@ -36,11 +36,6 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="PresentationFramework.Aero" />
-    <Reference Include="PS3FileSystem">
-      <HintPath>D:\OneDrive\Documents\PS3FileSystem\PS3FileSystem\bin\Debug\PS3FileSystem.dll</HintPath>
-      <Private>True</Private>
-      <EmbedInteropTypes>False</EmbedInteropTypes>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -62,6 +57,13 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="PS3FileSystem\Delegates.cs" />
+    <Compile Include="PS3FileSystem\Functions.cs" />
+    <Compile Include="PS3FileSystem\Param_PFD.cs" />
+    <Compile Include="PS3FileSystem\PARAM_SFO.cs" />
+    <Compile Include="PS3FileSystem\Ps3File.cs" />
+    <Compile Include="PS3FileSystem\Ps3SaveManager.cs" />
+    <Compile Include="PS3FileSystem\SecureFileInfo.cs" />
     <Compile Include="ThunderPlains.xaml.cs">
       <DependentUpon>ThunderPlains.xaml</DependentUpon>
     </Compile>

@@ -11,13 +11,20 @@ namespace FFX2SaveEditor.Saves
 {
     public class Ps3Save : Ffx2Save
     {
-        bool decrypted;
-        string pfdFile, sfoFile, datFile;
-        Ps3SaveManager manager;
+        public string Directory { get; set; }
 
         private readonly string[] ps3GameIDs = { "BLUS31211", "NPUB31247", "BLES01880", "NPEB01391", "BLJM61093", "BCAS20289", "NPJB00458" };
         private byte[] secureFileId = { 0x02, 0x06, 0x04, 0x03, 0x03, 0x08, 0x03, 0x02, 0x07, 0x09, 0x05, 0x00, 0x02, 0x08, 0x08, 0x04 };
         private const string dataName = "SAVES";
+
+        private string pfdFile, sfoFile, datFile;
+        private Ps3SaveManager manager;
+
+        public Ps3Save(string directory) : base(0x16268, 0x7980, 0x7cc0, 0x7844, 0x784d, 0x222c)
+        {
+            Directory = directory;
+            OpenPS3Save(directory);
+        }
 
         public Ps3Save(string[] files) : base(0x16268, 0x7980, 0x7cc0, 0x7844, 0x784d, 0x222c)
         {
@@ -53,7 +60,21 @@ namespace FFX2SaveEditor.Saves
                 MessageBox.Show("No SAVES file in selected files. Please select all three files (.PFD, .SFO, SAVES)");
                 return;
             }
-            OpenPS3Save(File.Open(pfdFile, FileMode.Open), File.Open(sfoFile, FileMode.Open), new MemoryStream(File.ReadAllBytes(datFile)));
+            OpenPS3Save(File.Open(pfdFile, FileMode.Open), File.Open(sfoFile, FileMode.Open), File.Open(datFile, FileMode.Open));
+        }
+
+        private void OpenPS3Save(string directory)
+        {
+            manager = new Ps3SaveManager(directory, secureFileId);
+            Ps3File file = manager.Files.FirstOrDefault(t => t.PFDEntry.FileName == dataName);
+
+            byte[] filedata = null;
+            if (file != null)
+                filedata = file.DecryptToBytes();
+            if (filedata == null)
+                return;
+
+            ReadFile(new MemoryStream(filedata));
         }
 
         private void OpenPS3Save(Stream pfd, Stream sfo, Stream bin)
@@ -75,10 +96,14 @@ namespace FFX2SaveEditor.Saves
 
         public override void SaveFile(string filename)
         {
+            Ps3File file;
             // First write raw file and mod checksum
             try
             {
-                base.SaveFile(filename);
+                file = manager.Files.FirstOrDefault(t => t.PFDEntry.FileName == dataName);
+                if (file == null) { MessageBox.Show("Could not locate data file named " + dataName); return; }
+
+                base.SaveFile(file.FilePath);
             }
             catch (Exception ex)
             {
@@ -87,23 +112,17 @@ namespace FFX2SaveEditor.Saves
             }
 
             // Then encrypt with PS3 standard
-            byte[] filedata = null;
-            Ps3File file = manager.Files.FirstOrDefault(t => t.PFDEntry.FileName == dataName);
-            if (file == null) { MessageBox.Show("Could not locate data file named " + dataName);return; }
-
-            filedata = file.EncryptToBytes();
-            if (filedata != null)
+            if (manager.ReBuildChanges(true))//(manager.Param_PFD.Encrypt(filename))
             {
-                using (var bw = new BinaryWriter(File.Open(filename, FileMode.Create)))
-                {
-                    bw.Write(filedata);
-                    bw.Flush();
-                }
-
                 MessageBox.Show("Saved successfully.", "File Saved");
             }
             else
                 MessageBox.Show("Error encrypting data to PS3 format.");
+        }
+
+        public void Convert(string filename)
+        {
+            base.SaveFile(filename);
         }
     }
 }

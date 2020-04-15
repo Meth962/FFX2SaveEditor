@@ -31,7 +31,20 @@
                 <Button.Background>
                     <ImageBrush ImageSource="Resources/SmallBar.png"/>
                 </Button.Background>
-                <TextBlock Text="Save As..." Foreground="#E1E1E1">
+                <TextBlock Text="Save Game" Foreground="#E1E1E1">
+                    <TextBlock.Effect>
+                        <DropShadowEffect BlurRadius="0" Direction="315" Color="Black" ShadowDepth="3"/>
+                    </TextBlock.Effect>
+                </TextBlock>
+            </Button>
+            <Button x:Name="btnConvertToPC" Visibility="Hidden" HorizontalAlignment="Left" Margin="782,10,0,0" Width="360" FontWeight="Bold" FontSize="22" Foreground="#E1E1E1" BorderBrush="{x:Null}" BorderThickness="0" Height="60" VerticalAlignment="Top" Click="btnConvert_Click" Cursor="Hand" Style="{DynamicResource ButtonStyle1}">
+                <Button.Effect>
+                    <DropShadowEffect ShadowDepth="10" Direction="315" Color="Black" Opacity="0.5"/>
+                </Button.Effect>
+                <Button.Background>
+                    <ImageBrush ImageSource="Resources/SmallBar.png"/>
+                </Button.Background>
+                <TextBlock Text="Convert to PC Save" Foreground="#E1E1E1">
                     <TextBlock.Effect>
                         <DropShadowEffect BlurRadius="0" Direction="315" Color="Black" ShadowDepth="3"/>
                     </TextBlock.Effect>

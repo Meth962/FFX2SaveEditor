@@ -1952,6 +1952,21 @@ namespace FFX2SaveEditor
             SaveFile();
         }
 
+        private void btnConvert_Click(object sender, RoutedEventArgs e)
+        {
+            if (save is Ps3Save)
+            {
+                SaveFileDialog sfd = new SaveFileDialog();
+                sfd.FileName = "ffx_1000";
+                sfd.Filter = "PC Save Data|*.*";
+
+                if (!(bool)sfd.ShowDialog())
+                    return;
+
+                ((Ps3Save)save).Convert(sfd.FileName);
+            }
+        }
+
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
         }
@@ -2148,31 +2163,37 @@ namespace FFX2SaveEditor
                 return;
 
             if (ofd.FileNames.Count() == 3)
-                save = new Ps3Save(ofd.FileNames);
+            {
+                save = new Ps3Save(System.IO.Path.GetDirectoryName(ofd.FileNames[0]));
+                btnConvertToPC.Visibility = Visibility.Visible;
+            }
             else
+            {
                 save = new PcSave(ofd.FileName);
+                btnConvertToPC.Visibility = Visibility.Hidden;
+            }
 
             UpdateMainDisplay();
         }
 
         private void SaveFile()
         {
-            SaveFileDialog sfd = new SaveFileDialog();
             if (save is Ps3Save)
             {
-                sfd.FileName = "SAVES";
-                sfd.Filter = "PS3 SAVES Data|*.*";
+                MessageBox.Show("You are about to overwrite your save files at\r\n\r\n" + ((Ps3Save)save).Directory + "\r\n\r\nThis is your last chance to back these files up! Hit OK when you are ready to continue.");
+                save.SaveFile("");
             }
             else if (save is PcSave)
             {
+                SaveFileDialog sfd = new SaveFileDialog();
                 sfd.FileName = ((PcSave)save).OriginalName;
                 sfd.Filter = "PC Save Data|*.*";
+
+                if (!(bool)sfd.ShowDialog())
+                    return;
+
+                save.SaveFile(sfd.FileName);
             }
-
-            if (!(bool)sfd.ShowDialog())
-                return;
-
-            save.SaveFile(sfd.FileName);
         }
 
         private void textboxLevel_TextChanged(object sender, TextChangedEventArgs e)

@@ -98,6 +98,11 @@ namespace FFX2SaveEditor
             AlBhedPrimers = new byte[4];
         }
 
+        public virtual byte[] GetBytes()
+        {
+            return ms.ToArray();
+        }
+
         public virtual void ReadFile(MemoryStream stream)
         {
             ms = stream;
@@ -109,7 +114,7 @@ namespace FFX2SaveEditor
 
             br.BaseStream.Seek(0x10, SeekOrigin.Begin);
             GameTime = TimeSpan.FromSeconds(br.ReadUInt32());
-            Gil = br.ReadInt32();
+            Gil = br.ReadInt32(); // not real value
 
             br.BaseStream.Seek(0x2ec, SeekOrigin.Begin);
             OpenAirCredits = br.ReadUInt32();
@@ -209,6 +214,9 @@ namespace FFX2SaveEditor
                     b >>= 1;
                 }
             }
+
+            br.BaseStream.Seek(0x7818, SeekOrigin.Begin);
+            Gil = br.ReadInt32();
 
             br.BaseStream.Seek(0x7824, SeekOrigin.Begin);
             Encounters = br.ReadUInt32();
@@ -354,7 +362,11 @@ namespace FFX2SaveEditor
 
         public virtual void WriteGil()
         {
+            // Save game info (unused)
             bw.BaseStream.Seek(0x14, SeekOrigin.Begin);
+            bw.Write(Gil);
+            // Actual gil value
+            bw.BaseStream.Seek(0x7818, SeekOrigin.Begin);
             bw.Write(Gil);
         }
 
@@ -466,9 +478,9 @@ namespace FFX2SaveEditor
 
         private void CalculateGameComplete()
         {
-            int complete = StoryFlagBytes.Sum(b => Convert.ToString(b, 2).ToCharArray().Count(c => c == '1'));
+            int incomplete = StoryFlagBytes.Sum(b => Convert.ToString(b, 2).ToCharArray().Count(c => c == '1'));
             bw.BaseStream.Seek(0x0C, SeekOrigin.Begin);
-            bw.Write((byte)((1 - complete / 525.0) * 100));
+            bw.Write((byte)((525 - incomplete) / 5));
         }
     }
 
