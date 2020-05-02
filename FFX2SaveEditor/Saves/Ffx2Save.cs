@@ -60,7 +60,7 @@ namespace FFX2SaveEditor
         public byte[] AlBhedPrimers { get; set; }
 
         public short StoryFlagCount { get; set; }
-        public byte[] StoryFlagBytes { get; set; }
+        public byte[] StoryFlagBytes { get; set; }        
         public List<StoryFlag> MissingFlags = new List<StoryFlag>();
         public List<StoryFlag> Requisites = new List<StoryFlag>();
 
@@ -182,10 +182,11 @@ namespace FFX2SaveEditor
             br.BaseStream.Seek(storyOffset, SeekOrigin.Begin);
             StoryFlagBytes = br.ReadBytes(StoryFlagBytes.Length);
 
-            // Requirements
+            // Requisites
             foreach (StoryFlag f in GameInfo.Requisites)
             {
-                byte b = work[f.Address];
+                br.BaseStream.Seek(f.Address, SeekOrigin.Begin);
+                byte b = br.ReadByte();
                 if ((b & f.Value) != f.Value)
                 {
                     Requisites.Add(f);
@@ -444,6 +445,16 @@ namespace FFX2SaveEditor
         {
             bw.BaseStream.Seek(storyOffset + offset, SeekOrigin.Begin);
             bw.Write(value);
+        }
+
+        public virtual void WriteRequisiteFlagXorValue(int offset, byte value)
+        {
+            // Read current value in save location
+            br.BaseStream.Seek(offset, SeekOrigin.Begin);
+            var b = br.ReadByte();
+            // Write XOR'd value
+            bw.BaseStream.Seek(offset, SeekOrigin.Begin);
+            bw.Write(b ^ value);
         }
 
         public virtual void CompleteWriteStoryFlags()

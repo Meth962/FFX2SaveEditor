@@ -2013,8 +2013,9 @@ namespace FFX2SaveEditor
 
         private void btnAllStory_Click(object sender, RoutedEventArgs e)
         {
+            save.CompleteWriteStoryFlags();
             save.MissingFlags.Clear();
-            save.Requisites.Clear();
+
             UpdateFlags();
         }
 
@@ -2066,9 +2067,17 @@ namespace FFX2SaveEditor
 
         private void RemoveFlag(StoryFlag flag)
         {
-            save.StoryFlagBytes[flag.Address] ^= flag.Value;
-            save.MissingFlags.Remove(flag);
-            save.WriteStoryFlag(flag.Address, save.StoryFlagBytes[flag.Address]);
+            if (!flag.IsRequisite)
+            {
+                save.StoryFlagBytes[flag.Address] ^= flag.Value;
+                save.MissingFlags.Remove(flag);
+                save.WriteStoryFlag(flag.Address, save.StoryFlagBytes[flag.Address]);
+            }
+            else
+            {
+                save.Requisites.Remove(flag);
+                save.WriteRequisiteFlagXorValue(flag.Address, flag.Value);
+            }
         }
 
         private void UpdateFlags()

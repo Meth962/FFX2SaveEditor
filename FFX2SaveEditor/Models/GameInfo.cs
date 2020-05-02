@@ -659,41 +659,41 @@ namespace FFX2SaveEditor
 
         public static List<StoryFlag> Requisites = new List<StoryFlag>()
         {
-            new StoryFlag(0x268,0x01,"Slept in airship cabin Chapter 1",1,"Airship"),
-            new StoryFlag(0x268,0x02,"Slept in airship cabin Chapter 2",2,"Airship"),
-            new StoryFlag(0x268,0x04,"Slept in airship cabin Chapter 3",3,"Airship"),
-            new StoryFlag(0x268,0x08,"Slept in airship cabin Chapter 4",4,"Airship"),
-            new StoryFlag(0x268,0x10,"Slept in airship cabin Chapter 5",5,"Airship"),
+            new StoryFlag(0x268,0x01,"Slept in airship cabin Chapter 1",1,"Airship",true),
+            new StoryFlag(0x268,0x02,"Slept in airship cabin Chapter 2",2,"Airship",true),
+            new StoryFlag(0x268,0x04,"Slept in airship cabin Chapter 3",3,"Airship",true),
+            new StoryFlag(0x268,0x08,"Slept in airship cabin Chapter 4",4,"Airship",true),
+            new StoryFlag(0x268,0x10,"Slept in airship cabin Chapter 5",5,"Airship",true),
 
-            new StoryFlag(0x489,0x20,"Saw HQ form Kilika man's camera Chapter 1",1,"Kilika"),
-            new StoryFlag(0x489,0x40,"Saw HQ from Kilika man's camera Chapter 3",3,"Kilika"),
+            new StoryFlag(0x489,0x20,"Saw HQ form Kilika man's camera Chapter 1",1,"Kilika",true),
+            new StoryFlag(0x489,0x40,"Saw HQ from Kilika man's camera Chapter 3",3,"Kilika",true),
             //new StoryFlag(0x439,0x01,"Spoke to al bhed girl with 3 machina on mi'ihen",3,"Mi'ihen"),
-            new StoryFlag(0x231,0x40,"Let Clasko join airship",2,"Mi'ihen"),
-            new StoryFlag(0x388,0x80,"Allowed O'aka to lay low on your ship",1,"Macalania"),
+            new StoryFlag(0x231,0x40,"Let Clasko join airship",2,"Mi'ihen",true),
+            new StoryFlag(0x388,0x80,"Allowed O'aka to lay low on your ship",1,"Macalania",true),
 
-            new StoryFlag(0xc60,0x01,"Told Cid 'You bet I do!' in Zanarkand",1,"Zanarkand"),
+            new StoryFlag(0xc60,0x01,"Told Cid 'You bet I do!' in Zanarkand",1,"Zanarkand",true),
 
-            new StoryFlag(0x439,0x04,"Machina destroying mission complete",3,"Mi'ihen"),
+            new StoryFlag(0x439,0x04,"Machina destroying mission complete",3,"Mi'ihen",true),
 
-            new StoryFlag(0x317,0x01,"Shinra spotted installing sphere in mi'ihen",3,"Mi'ihen"),
-            new StoryFlag(0x318,0x20,"Shinra dropped a comm sphere on mi'ihen road N",3,"Mi'ihen"),
-            new StoryFlag(0x234,0x08,"Shinra seen placing a comm sphere at mushroom rock, but then he moves it",3,"Mushroom Rock"),
-            new StoryFlag(0xca1,0x40,"Shinra seen placing a comm sphere at moonflow",3,"Moonflow"),
-            new StoryFlag(0xca1,0x80,"Shinra seen placing a comm sphere at guadosalam",3,"Guadosalam"),
-            new StoryFlag(0xca2,0x01,"Shinra seen placing a comm sphere at thunder plains",3,"Thunder Plains"),
-            new StoryFlag(0xca2,0x02,"Shinra seen placing a comm sphere at macalania",3,"Macalania"),
-            new StoryFlag(0xca2,0x80,"Shinra seen placing a comm sphere at macalania agency",3,"Macalania"),
-            new StoryFlag(0xca3,0x02,"Automatic install on scene of hover driving to cactuar nation",3,"Bikanel"),
-            new StoryFlag(0xca2,0x01,"Automatic install when visiting bridge to Gagazet",3,"Gagazet"),
-            new StoryFlag(0xca2,0x04,"Shinra seen placing a comm sphere at bevelle",3,"Bevelle"),
-            new StoryFlag(0x317,0x08,"Shinra seen placing a comm sphere at Calm Land Agency",3,"Calm Lands"),
-            new StoryFlag(0x318,0x80,"Shinra seen placing a comm sphere in chocobo ranch",3,"Calm Lands"),
-            new StoryFlag(0xca2,0x20,"Shinra seen placing a comm sphere in Gagazet",3,"Gagazet"),
-            new StoryFlag(0xca2,0x40,"Shinra seen placing a comm sphere in Zanarkand",3,"Zanarkand"),
-            new StoryFlag(0xca1,0x01,"Shinra scene placing a comm sphere in Besaid",3,"Besaid"),
-            new StoryFlag(0xca1,0x02,"Shinra seen placing a comm sphere in Djose Temple",3,"Djose Temple"),
+            new StoryFlag(0x317,0x01,"Shinra spotted installing sphere in mi'ihen",3,"Mi'ihen",true),
+            new StoryFlag(0x318,0x20,"Shinra dropped a comm sphere on mi'ihen road N",3,"Mi'ihen",true),
+            new StoryFlag(0x234,0x08,"Shinra seen placing a comm sphere at mushroom rock, but then he moves it",3,"Mushroom Rock",true),
+            new StoryFlag(0xca1,0x40,"Shinra seen placing a comm sphere at moonflow",3,"Moonflow",true),
+            new StoryFlag(0xca1,0x80,"Shinra seen placing a comm sphere at guadosalam",3,"Guadosalam",true),
+            new StoryFlag(0xca2,0x01,"Shinra seen placing a comm sphere at thunder plains",3,"Thunder Plains",true),
+            new StoryFlag(0xca2,0x02,"Shinra seen placing a comm sphere at macalania",3,"Macalania",true),
+            new StoryFlag(0xca2,0x80,"Shinra seen placing a comm sphere at macalania agency",3,"Macalania",true),
+            new StoryFlag(0xca3,0x02,"Automatic install on scene of hover driving to cactuar nation",3,"Bikanel",true),
+            new StoryFlag(0xca2,0x01,"Automatic install when visiting bridge to Gagazet",3,"Gagazet",true),
+            new StoryFlag(0xca2,0x04,"Shinra seen placing a comm sphere at bevelle",3,"Bevelle",true),
+            new StoryFlag(0x317,0x08,"Shinra seen placing a comm sphere at Calm Land Agency",3,"Calm Lands",true),
+            new StoryFlag(0x318,0x80,"Shinra seen placing a comm sphere in chocobo ranch",3,"Calm Lands",true),
+            new StoryFlag(0xca2,0x20,"Shinra seen placing a comm sphere in Gagazet",3,"Gagazet",true),
+            new StoryFlag(0xca2,0x40,"Shinra seen placing a comm sphere in Zanarkand",3,"Zanarkand",true),
+            new StoryFlag(0xca1,0x01,"Shinra scene placing a comm sphere in Besaid",3,"Besaid",true),
+            new StoryFlag(0xca1,0x02,"Shinra seen placing a comm sphere in Djose Temple",3,"Djose Temple",true),
 
-            new StoryFlag(0xf88,0x02,"Four whistles heard in Farplane",5,"Farplane")
+            new StoryFlag(0xf88,0x02,"Four whistles heard in Farplane",5,"Farplane",true)
         };       
     }
 }
