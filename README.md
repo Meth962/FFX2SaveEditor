@@ -19,3 +19,5 @@ This editor will allow you to view and change the pesky story completion flags, 
  ## TODO / Ideas
  * Add controller support
  * Auto backup PS3 files or give option to save elsewhere.
+ * Add arena data
+ * Support lower resolutions under 1080p
