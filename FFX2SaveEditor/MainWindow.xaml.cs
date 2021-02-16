@@ -23,9 +23,6 @@ using System.Windows.Shapes;
 
 namespace FFX2SaveEditor
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
     public partial class MainWindow : Window
     {
         public MainWindow()
@@ -39,6 +36,57 @@ namespace FFX2SaveEditor
         Dressphere currentDress = Dressphere.GunMage;
 
         int scroll = 0;
+
+        #region Scaling
+        public static readonly DependencyProperty ScaleValueProperty = DependencyProperty.Register("ScaleValue", typeof(double), typeof(MainWindow), 
+            new UIPropertyMetadata(1.0, new PropertyChangedCallback(OnScaleValueChanged), new CoerceValueCallback(OnCoerceScaleValue)));
+
+        private static object OnCoerceScaleValue(DependencyObject o, object value)
+        {
+            MainWindow mainWindow = o as MainWindow;
+            if (mainWindow != null)
+                return mainWindow.OnCoerceScaleValue((double)value);
+            else return value;
+        }
+
+        private static void OnScaleValueChanged(DependencyObject o, DependencyPropertyChangedEventArgs e)
+        {
+            MainWindow mainWindow = o as MainWindow;
+            if (mainWindow != null)
+                mainWindow.OnScaleValueChanged((double)e.OldValue, (double)e.NewValue);
+        }
+
+        protected virtual double OnCoerceScaleValue(double value)
+        {
+            if (double.IsNaN(value))
+                return 1.0f;
+
+            value = Math.Max(0.1, value);
+            return value;
+        }
+
+        protected virtual void OnScaleValueChanged(double oldValue, double newValue) { }
+
+        public double ScaleValue
+        {
+            get => (double)GetValue(ScaleValueProperty);
+            set => SetValue(ScaleValueProperty, value);
+        }
+
+        private void MainGrid_SizeChanged(object sender, SizeChangedEventArgs e)
+        {
+            CalculateScale();
+        }
+
+        private void CalculateScale()
+        {
+            double xScale = ActualWidth / 1920f;
+            double yScale = ActualHeight / 1080f;
+            double value = Math.Min(xScale, yScale);
+
+            ScaleValue = (double)OnCoerceScaleValue(ffx2MainWindow, value);
+        }
+        #endregion
 
         #region WPF Stuff
         private void SetLightSource(FrameworkElement sender, FrameworkElement target)
@@ -182,28 +230,28 @@ namespace FFX2SaveEditor
 
         private void ClearConfigScreen()
         {
-            DoubleAnimation da = new DoubleAnimation(ActualHeight, TimeSpan.FromSeconds(0.25));
+            DoubleAnimation da = new DoubleAnimation(8192, TimeSpan.FromSeconds(0.25));
             da.Completed += SubMenuClear;
             transUnderConstruction.BeginAnimation(TranslateTransform.YProperty, da);
         }
 
         private void ClearSidequestScreen()
         {
-            DoubleAnimation da = new DoubleAnimation(ActualHeight, TimeSpan.FromSeconds(0.25));
+            DoubleAnimation da = new DoubleAnimation(8192, TimeSpan.FromSeconds(0.25));
             da.Completed += SubMenuClear;
             transUnderConstruction.BeginAnimation(TranslateTransform.YProperty, da);
         }
 
         private void ClearMiniGameSelectScreen()
         {
-            DoubleAnimation da = new DoubleAnimation(ActualHeight, TimeSpan.FromSeconds(0.25));
+            DoubleAnimation da = new DoubleAnimation(8192, TimeSpan.FromSeconds(0.25));
             da.Completed += SubMenuClear;
             transUnderConstruction.BeginAnimation(TranslateTransform.YProperty, da);
         }
 
         private void ClearMinigameScreen()
         {
-            DoubleAnimation da = new DoubleAnimation(ActualHeight, TimeSpan.FromSeconds(0.25));
+            DoubleAnimation da = new DoubleAnimation(8192, TimeSpan.FromSeconds(0.25));
             da.Completed += SubMenuClear;
             transUnderConstruction.BeginAnimation(TranslateTransform.YProperty, da);
         }
@@ -211,7 +259,7 @@ namespace FFX2SaveEditor
         private void ClearDressphereScreen()
         {
             TimeSpan ts = new TimeSpan(0, 0, 0, 0, 25);
-            DoubleAnimation da = new DoubleAnimation(-ActualWidth, TimeSpan.FromSeconds(0.25));
+            DoubleAnimation da = new DoubleAnimation(-1920, TimeSpan.FromSeconds(0.25));
             btnAllDressTrans.BeginAnimation(TranslateTransform.YProperty, da);
             ClearGarmDressScreen(da, ts);
         }
@@ -219,7 +267,7 @@ namespace FFX2SaveEditor
         private void ClearAbilitiesPartySelectScreen()
         {
             var ts = new TimeSpan(0, 0, 0, 0, 25);
-            DoubleAnimation da = new DoubleAnimation(-ActualWidth, TimeSpan.FromSeconds(0.25));
+            DoubleAnimation da = new DoubleAnimation(-1920, TimeSpan.FromSeconds(0.25));
             if(menuScreen == MenuScreen.Main)
                 btnAllAbilitiesTrans.BeginAnimation(TranslateTransform.YProperty, da);
             transPartyHeader.BeginAnimation(TranslateTransform.XProperty, da);
@@ -235,12 +283,12 @@ namespace FFX2SaveEditor
         private void ClearAbilitiesDressSelectScreen()
         {
             var ts = new TimeSpan(0, 0, 0, 0, 25);
-            DoubleAnimation da = new DoubleAnimation(-ActualWidth, TimeSpan.FromSeconds(0.25));
+            DoubleAnimation da = new DoubleAnimation(-1920, TimeSpan.FromSeconds(0.25));
             if (menuScreen == MenuScreen.Main)
             {
-                da.To = ActualHeight;
+                da.To = 8192;
                 btnAllAbilitiesTrans.BeginAnimation(TranslateTransform.YProperty, da);
-                da.To = -ActualWidth;
+                da.To = -1920;
             }
             ClearGarmDressScreen(da, ts);
         }
@@ -248,7 +296,7 @@ namespace FFX2SaveEditor
         private void ClearAbilitiesScreen()
         {
             var ts = new TimeSpan(0, 0, 0, 0, 25);
-            DoubleAnimation da = new DoubleAnimation(ActualHeight, TimeSpan.FromSeconds(0.25));
+            DoubleAnimation da = new DoubleAnimation(8192, TimeSpan.FromSeconds(0.25));
 
             ClearItemAccScreen(da, ts);
         }
@@ -256,7 +304,7 @@ namespace FFX2SaveEditor
         private void ClearAccessoryScreen()
         {
             TimeSpan ts = new TimeSpan(0, 0, 0, 0, 25);
-            DoubleAnimation da = new DoubleAnimation(ActualHeight, TimeSpan.FromSeconds(0.25));
+            DoubleAnimation da = new DoubleAnimation(8192, TimeSpan.FromSeconds(0.25));
             btnAllAccTrans.BeginAnimation(TranslateTransform.YProperty, da);
             ClearItemAccScreen(da, ts);
         }
@@ -312,7 +360,7 @@ namespace FFX2SaveEditor
         private void ClearGarmentScreen()
         {
             TimeSpan ts = new TimeSpan(0, 0, 0, 0, 25);
-            DoubleAnimation da = new DoubleAnimation(-ActualWidth, TimeSpan.FromSeconds(0.25));
+            DoubleAnimation da = new DoubleAnimation(-1920, TimeSpan.FromSeconds(0.25));
             btnAllGarmTrans.BeginAnimation(TranslateTransform.YProperty, da);
             ClearGarmDressScreen(da, ts);
         }
@@ -347,14 +395,14 @@ namespace FFX2SaveEditor
 
         private void ClearEquipScreen()
         {
-            DoubleAnimation da = new DoubleAnimation(ActualHeight, TimeSpan.FromSeconds(0.25));
+            DoubleAnimation da = new DoubleAnimation(8192, TimeSpan.FromSeconds(0.25));
             da.Completed += SubMenuClear;
             transUnderConstruction.BeginAnimation(TranslateTransform.YProperty, da);
         }
 
         private void ClearStoryScreen()
         {
-            DoubleAnimation da = new DoubleAnimation(ActualHeight, TimeSpan.FromSeconds(0.25));
+            DoubleAnimation da = new DoubleAnimation(8192, TimeSpan.FromSeconds(0.25));
             transStoryTree.BeginAnimation(TranslateTransform.YProperty, da);
             btnAllStoryTrans.BeginAnimation(TranslateTransform.YProperty, da);
             da.Completed += SubMenuClear;
@@ -403,7 +451,7 @@ namespace FFX2SaveEditor
             dau.BeginTime += TimeSpan.FromMilliseconds(18); dau.To -= 70;
             transConfig.BeginAnimation(TranslateTransform.YProperty, dau);
 
-            DoubleAnimation dar = new DoubleAnimation(ActualWidth, TimeSpan.FromSeconds(0.25));
+            DoubleAnimation dar = new DoubleAnimation(1920, TimeSpan.FromSeconds(0.25));
             if (menuScreen == MenuScreen.AbilitiesPartySelect) dar.To = 0;
             transYuna.BeginAnimation(TranslateTransform.XProperty, dar);
             dar.BeginTime += TimeSpan.FromMilliseconds(18);
@@ -414,7 +462,7 @@ namespace FFX2SaveEditor
             transPaine.BeginAnimation(TranslateTransform.XProperty, dar);
             dar.BeginTime += TimeSpan.FromMilliseconds(18);
             dar.Completed += MenuCleared;
-            dar.To = ActualWidth;
+            dar.To = 1920;
             transGilTime.BeginAnimation(TranslateTransform.XProperty, dar);
         }
 
@@ -559,7 +607,7 @@ namespace FFX2SaveEditor
         private void ClearItemScreen()
         {
             TimeSpan ts = new TimeSpan(0, 0, 0, 0, 25);
-            DoubleAnimation da = new DoubleAnimation(this.ActualHeight, TimeSpan.FromSeconds(0.25));
+            DoubleAnimation da = new DoubleAnimation(8192, TimeSpan.FromSeconds(0.25));
             btnAllItemsTrans.BeginAnimation(TranslateTransform.YProperty, da);
             ClearItemAccScreen(da, ts);
         }
@@ -1144,7 +1192,7 @@ namespace FFX2SaveEditor
             dressHeader.Source = new BitmapImage(new Uri(BaseUriHelper.GetBaseUri(this), "/FFX2SaveEditor;component/Resources/DressphereHeader.png"));
 
             TimeSpan ts = new TimeSpan(0, 0, 0, 0, 250);
-            DoubleAnimation dax = new DoubleAnimation(ActualWidth, ts);
+            DoubleAnimation dax = new DoubleAnimation(1920, ts);
             if(currentChar != PartyMember.Yuna)
                 transYuna.BeginAnimation(TranslateTransform.XProperty, dax);
             if (currentChar != PartyMember.Rikku)
@@ -1965,10 +2013,6 @@ namespace FFX2SaveEditor
 
                 ((Ps3Save)save).Convert(sfd.FileName);
             }
-        }
-
-        private void Window_Loaded(object sender, RoutedEventArgs e)
-        {
         }
 
         private void trvStory_MouseDoubleClick(object sender, MouseButtonEventArgs e)

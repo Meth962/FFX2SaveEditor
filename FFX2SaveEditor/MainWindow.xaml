@@ -3,13 +3,20 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:Themes="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero" x:Class="FFX2SaveEditor.MainWindow"
     xmlns:local="clr-namespace:FFX2SaveEditor"
-    Title="FFX-2 Save Editor" Height="1080" Width="1920"
-    Loaded="Window_Loaded"
-    FontFamily="Helvetica Neue" Icon="Resources/tonberry.gif" WindowStartupLocation="CenterScreen" WindowState="Maximized">
+    Title="FFX-2 Save Editor"
+    Name="ffx2MainWindow"
+    FontFamily="Helvetica Neue" Icon="Resources/tonberry.gif" WindowStartupLocation="CenterScreen">
     <Window.Background>
         <ImageBrush ImageSource="/FFX2SaveEditor;component/Resources/Background.png"/>
     </Window.Background>
-    <Grid>
+    <Grid Name="MainGrid" SizeChanged="MainGrid_SizeChanged">
+        <Grid.LayoutTransform>
+            <ScaleTransform x:Name="ApplicationScaleTransform"
+                        CenterX="0"
+                        CenterY="0"
+                        ScaleX="{Binding ElementName=ffx2MainWindow, Path=ScaleValue}"
+                        ScaleY="{Binding ElementName=ffx2MainWindow, Path=ScaleValue}" />
+        </Grid.LayoutTransform>
         <Grid Name="TopNav">
             <Button x:Name="btnLoad" HorizontalAlignment="Left" Margin="10,10,0,0" Width="360" FontWeight="Bold" FontSize="22" Foreground="#E1E1E1" BorderBrush="{x:Null}" BorderThickness="0" Height="60" VerticalAlignment="Top" Click="btnLoad_Click" Cursor="Hand" Style="{DynamicResource ButtonStyle1}">
                 <Button.Effect>
