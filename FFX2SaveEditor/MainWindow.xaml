@@ -79,12 +79,12 @@
                         <DropShadowEffect BlurRadius="0" Direction="315" Color="Black" ShadowDepth="3"/>
                     </TextBox.Effect>
                 </TextBox>
-                <Label x:Name="lblYunaHP" HorizontalAlignment="Left" Height="34" Margin="1402,212,0,0" Content="9999 / 9999" VerticalAlignment="Top" Width="301" Foreground="#C1C1C1" FontSize="28" HorizontalContentAlignment="Center">
+                <Label x:Name="lblYunaHP" HorizontalAlignment="Left" Height="36" Margin="1402,212,0,0" Content="9999 / 9999" VerticalAlignment="Top" Width="301" Foreground="#C1C1C1" FontSize="28" HorizontalContentAlignment="Center">
                     <Label.Effect>
                         <DropShadowEffect BlurRadius="0" Direction="315" Color="Black" ShadowDepth="3"/>
                     </Label.Effect>
                 </Label>
-                <Label x:Name="lblYunaMP" HorizontalAlignment="Left" Height="34" Margin="1402,250,0,0" Content="999 / 999" VerticalAlignment="Top" Width="301" Background="{x:Null}" Foreground="#C1C1C1" FontSize="28" HorizontalContentAlignment="Center" BorderBrush="{x:Null}">
+                <Label x:Name="lblYunaMP" HorizontalAlignment="Left" Height="36" Margin="1402,250,0,0" Content="999 / 999" VerticalAlignment="Top" Width="301" Background="{x:Null}" Foreground="#C1C1C1" FontSize="28" HorizontalContentAlignment="Center" BorderBrush="{x:Null}">
                     <Label.Effect>
                         <DropShadowEffect BlurRadius="0" Direction="315" Color="Black" ShadowDepth="3"/>
                     </Label.Effect>
@@ -109,12 +109,12 @@
                         <DropShadowEffect BlurRadius="0" Direction="315" Color="Black" ShadowDepth="3"/>
                     </TextBox.Effect>
                 </TextBox>
-                <Label x:Name="lblRikkuMP" HorizontalAlignment="Left" Height="34" Margin="1246,432,0,0" Content="999 / 999" VerticalAlignment="Top" Width="301" Background="{x:Null}" Foreground="#C1C1C1" FontSize="28" HorizontalContentAlignment="Center" BorderBrush="{x:Null}">
+                <Label x:Name="lblRikkuMP" HorizontalAlignment="Left" Height="36" Margin="1246,432,0,0" Content="999 / 999" VerticalAlignment="Top" Width="301" Background="{x:Null}" Foreground="#C1C1C1" FontSize="28" HorizontalContentAlignment="Center" BorderBrush="{x:Null}">
                     <Label.Effect>
                         <DropShadowEffect BlurRadius="0" Direction="315" Color="Black" ShadowDepth="3"/>
                     </Label.Effect>
                 </Label>
-                <Label x:Name="lblRikkuHP" HorizontalAlignment="Left" Height="34" Margin="1246,390,0,0" Content="9999 / 9999" VerticalAlignment="Top" Width="301" Foreground="#C1C1C1" FontSize="28" HorizontalContentAlignment="Center">
+                <Label x:Name="lblRikkuHP" HorizontalAlignment="Left" Height="36" Margin="1246,390,0,0" Content="9999 / 9999" VerticalAlignment="Top" Width="301" Foreground="#C1C1C1" FontSize="28" HorizontalContentAlignment="Center">
                     <Label.Effect>
                         <DropShadowEffect BlurRadius="0" Direction="315" Color="Black" ShadowDepth="3"/>
                     </Label.Effect>
@@ -134,7 +134,7 @@
                         <DropShadowEffect ShadowDepth="50" Direction="315" Color="Black" Opacity="0.5" BlurRadius="0"/>
                     </Image.Effect>
                 </Image>
-                <Label x:Name="lblPaineHP" HorizontalAlignment="Left" Height="34" Margin="1150,572,0,0" Content="9999 / 9999" VerticalAlignment="Top" Width="301" Background="{x:Null}" Foreground="#C1C1C1" FontSize="28" HorizontalContentAlignment="Center" BorderBrush="{x:Null}">
+                <Label x:Name="lblPaineHP" HorizontalAlignment="Left" Height="36" Margin="1150,572,0,0" Content="9999 / 9999" VerticalAlignment="Top" Width="301" Background="{x:Null}" Foreground="#C1C1C1" FontSize="28" HorizontalContentAlignment="Center" BorderBrush="{x:Null}">
                     <Label.Effect>
                         <DropShadowEffect BlurRadius="0" Direction="315" Color="Black" ShadowDepth="3"/>
                     </Label.Effect>
@@ -144,7 +144,7 @@
                         <DropShadowEffect BlurRadius="0" Direction="315" Color="Black" ShadowDepth="3"/>
                     </TextBox.Effect>
                 </TextBox>
-                <Label x:Name="lblPaineMP" HorizontalAlignment="Left" Height="34" Margin="1150,610,0,0" Content="999 / 999" VerticalAlignment="Top" Width="301" Background="{x:Null}" Foreground="#C1C1C1" FontSize="28" HorizontalContentAlignment="Center" BorderBrush="{x:Null}">
+                <Label x:Name="lblPaineMP" HorizontalAlignment="Left" Height="36" Margin="1150,610,0,0" Content="999 / 999" VerticalAlignment="Top" Width="301" Background="{x:Null}" Foreground="#C1C1C1" FontSize="28" HorizontalContentAlignment="Center" BorderBrush="{x:Null}">
                     <Label.Effect>
                         <DropShadowEffect BlurRadius="0" Direction="315" Color="Black" ShadowDepth="3"/>
                     </Label.Effect>

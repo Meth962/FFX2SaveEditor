@@ -159,7 +159,7 @@ namespace FFX2SaveEditor
             lblRikkuMP.Content = $"{save.Characters[1].MP} / {save.Characters[1].MaxMP}";
             lblPaineMP.Content = $"{save.Characters[2].MP} / {save.Characters[2].MaxMP}";
             tbxGil.Text = save.Gil.ToString();
-            tbxPlayTime.Text = $"{save.GameTime.TotalHours:0} : {save.GameTime.Minutes} : {save.GameTime.Seconds}";
+            tbxPlayTime.Text = $"{save.GameTime.TotalHours:0} : {save.GameTime.Minutes:00} : {save.GameTime.Seconds:00}";
         }
 
         private void SwitchToScreen(MenuScreen screen)
