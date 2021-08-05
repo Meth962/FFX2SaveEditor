@@ -225,6 +225,7 @@ namespace FFX2SaveEditor
             //-Moonflow- (+0.2%) 33.8%
             new StoryFlag(0xb3b,0x02,"Tobli: I am in big, big trouble! I'm supposed... (don't help tobli in Ch1)",7,"Moonflow"),
             new StoryFlag(0xb3c,0x08,"Tobli: With the Gullwings in charge, we'll sell...",2,"Moonflow"),
+            new StoryFlag(0xb3d,0x04,"Tobli: And here it is! The promised... (don't help tobli in Ch1)",7,"Moonflow"),
             //-Thunder Plains- (+0.2%) 34.0%
             new StoryFlag(0xb9f,0x20,"Cid: What, ya blind? Can't ya see I'm...",2,"Thunder Plains"),
             //-Macalania Woods- (+1.4%) 35.4%
@@ -294,6 +295,7 @@ namespace FFX2SaveEditor
             new StoryFlag(0xcfd,0x02,"Rikku: Nothing...",2,"Bevelle"),
             new StoryFlag(0xcfe,0x02,"Leblanc: I must report to Noojie-Woojie at once!",2,"Bevelle"),
             new StoryFlag(0xcfe,0x20,"This isn't how it was supposed to be.",2,"Bevelle"),
+            new StoryFlag(0xce4,0x02,"Baralai: Waht's this? High Summoner Yuna?... (don't meet Baralai in Ch1)",7,"Bevelle"),
             //-CHAPTER 3-
             //-Airship- (+0.8%) 45.6%
             new StoryFlag(0xeb2,0x20,"Buddy: Trouble. And I mean big time!",3,"Airship"),
@@ -330,6 +332,7 @@ namespace FFX2SaveEditor
             new StoryFlag(0x1d7e,0x02,"Kinoc: This is the final exercise.",3,"Guadosalam"),
             //-Thunder Plains- (+0.2%) 50%
             new StoryFlag(0x10f2,0x10,"Lian: Where does Lady Yuna think we should search for way...",3,"Thunder Plains"),
+            new StoryFlag(0x10ff,0x01,"Cid: At this rate, who knows when we'll... (told Cid 'not really' in Ch1)",7,"Thunder Plains"),
             //-Macalania Forest- (+0.8%) 50.8%
             new StoryFlag(0x1004,0x08,"Paine: Must be from Macalania Temple.",3,"Macalania Forest"),
             new StoryFlag(0x101d,0x04,"Wryd wys id?",3,"Macalania Forest"),
@@ -530,6 +533,7 @@ namespace FFX2SaveEditor
             new StoryFlag(0x18a9,0x80,"Wakka: I chose a name. His name is Vidina.",5,"Besaid"),
             new StoryFlag(0x18ab,0x40,"Wakka: But you know, in the end I'm just me.",5,"Besaid"),
             new StoryFlag(0x18ad,0x08,"Rikku: They're in their own little world.",5,"Besaid"),
+            new StoryFlag(0x18a0,0x20,"Wakka: Dryhg ouu. (Thank you)... (Episode concluded)",7,"Besaid"),
             //-Kilika- (+1.0%) 81.2%
             new StoryFlag(0x18b6,0x01,"Dona: New Yevon this, Youth League that.",5,"Kilika"),
             new StoryFlag(0x18c1,0x20,"Paine: Songs are powerful.",5,"Kilika"),
@@ -654,7 +658,9 @@ namespace FFX2SaveEditor
             new StoryFlag(0x2857,0x04,"Yuna: There's something I must tell you. Words left unspoken...",5,"Farplane"),
             new StoryFlag(0x2858,0x10,"Shuyin: You are not Lenne!",5,"Farplane"),
             new StoryFlag(0x2859,0x08,"Shuyin: A thousand years, and this moment is all we get?",5,"Farplane"),
-            new StoryFlag(0x285a,0x08,"Lenne: Let's go. I have a new song for you.",5,"Farplane")
+            new StoryFlag(0x285a,0x08,"Lenne: Let's go. I have a new song for you.",5,"Farplane"),
+            new StoryFlag(0x2861,0x20,"*screen fades white... (don't do 4 whistles ch3)",7,"Farplane"),
+            new StoryFlag(0x2862,0x01,"Yuna: But you know, I'm not worried anymore. (don't do 4 whistles ch3)",7,"Farplane")
         };
 
         public static List<StoryFlag> Requisites = new List<StoryFlag>()
